@@ -92,3 +92,7 @@ class SentPairEntity(BaseDataMatrixEntity):
         'embedded_text_right': List[int],
         'label': int
       }
+    
+
+
+ProcessedDataEntity = SentPairEntity

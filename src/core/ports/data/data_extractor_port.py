@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from ...core.entities.extracted_data_entity import ExtractedDataEntity
+from ....core.entities.data.extracted_data_entity import ExtractedDataEntity
 
 class DataExtractorPort(ABC):
   @abstractmethod

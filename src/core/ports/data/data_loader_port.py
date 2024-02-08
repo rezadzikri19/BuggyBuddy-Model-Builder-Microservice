@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
-from ...core.entities.extracted_data_entity import ExtractedDataEntity
-from ..entities.embedded_data_entity import EmbeddedDataEntity
+from ....core.entities.data.extracted_data_entity import ExtractedDataEntity
+from ....core.entities.data.embedded_data_entity import EmbeddedDataEntity
 
 class DataLoaderPort(ABC):
   @abstractmethod
