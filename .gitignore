@@ -1,0 +1,12 @@
+.env
+
+**/build
+**/*.egg-info
+**/notebooks
+**/artifacts
+**/logs
+**/caches
+**/venv
+**/docker
+
+**/__pycache__
