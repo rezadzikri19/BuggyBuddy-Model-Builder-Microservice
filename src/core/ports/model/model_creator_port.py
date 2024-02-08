@@ -1,4 +1,3 @@
-from typing import Any
 from abc import ABC, abstractmethod
 
 from ...entities.model.base_model_entity import BaseModelEntity

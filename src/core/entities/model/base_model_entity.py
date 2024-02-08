@@ -1,6 +1,7 @@
 from typing import Any, List
 from ..data.base_data_entity import BaseDataMatrixEntity, BaseDataArrayModel
 
+
 class BaseModelEntity:
   def __init__(self, model: Any) -> None:
     self.model = model   

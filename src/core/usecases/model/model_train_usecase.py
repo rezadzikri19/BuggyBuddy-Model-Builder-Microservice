@@ -5,6 +5,7 @@ from ....core.ports.logger_port import LoggerPort
 from ....core.entities.model.base_model_entity import BaseModelEntity
 from ....core.entities.data.processed_data_entity import ProcessedDataEntity
 
+
 class ModelTrainUsecase:
   def __init__(
       self,

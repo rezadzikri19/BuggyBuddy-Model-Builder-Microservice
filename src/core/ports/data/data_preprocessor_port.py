@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import List
 
-from ....core.entities.data.processed_data_entity import *
 from ....core.entities.data.extracted_data_entity import ExtractedDataEntity
+from ....core.dtos.data_preprocessing_dto import *
 
 class DataPreprocessorPort(ABC):
   @abstractmethod
@@ -30,5 +30,5 @@ class DataPreprocessorPort(ABC):
     pass
   
   @abstractmethod
-  def generate_sent_pairs(self, data: SentEmbeddingEntity) -> ProcessedDataEntity:
+  def generate_sent_pairs(self, data: SentEmbeddingEntity) -> SentPairEntity:
     pass

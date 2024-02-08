@@ -6,6 +6,7 @@ from ...entities.data.embedded_data_entity import EmbeddedDataEntity
 
 from ...utils.schema_validation_util import io_schema_validation
 
+
 class LoadDataUsecase():
   def __init__(
       self,

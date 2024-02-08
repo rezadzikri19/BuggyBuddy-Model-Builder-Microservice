@@ -5,6 +5,7 @@ from ....core.ports.logger_port import LoggerPort
 
 from ....core.entities.model.base_model_entity import BaseModelEntity
 
+
 class ModelCreateUsecase:
   def __init__(
       self,

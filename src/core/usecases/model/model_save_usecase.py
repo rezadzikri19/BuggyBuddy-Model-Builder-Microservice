@@ -3,6 +3,7 @@ from ....core.ports.logger_port import LoggerPort
 
 from ....core.entities.model.base_model_entity import BaseModelEntity
 
+
 class ModelSaveUsecase:
   def __init__(
       self,
@@ -12,7 +13,10 @@ class ModelSaveUsecase:
     self.logger = logger
   
   
-  def save_models(self, model_training: BaseModelEntity, model_embedding: BaseModelEntity) -> None:
+  def save_models(
+      self,
+      model_training: BaseModelEntity,
+      model_embedding: BaseModelEntity) -> None:
     try:
       self.model_saver.save_model_training(model_training)
       self.model_saver.save_model_embedding(model_embedding)

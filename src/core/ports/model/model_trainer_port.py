@@ -1,4 +1,4 @@
-from typing import Tuple, List, Dict, Optional
+from typing import Tuple, Optional
 from abc import ABC, abstractmethod
 
 from ....core.entities.data.processed_data_entity import ProcessedDataEntity
