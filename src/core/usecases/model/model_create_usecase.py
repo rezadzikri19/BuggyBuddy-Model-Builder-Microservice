@@ -1,5 +1,3 @@
-from typing import Tuple
-
 from ....core.ports.model.model_creator_port import ModelCreatorPort
 from ....core.ports.logger_port import LoggerPort
 
@@ -15,11 +13,10 @@ class ModelCreateUsecase:
     self.logger = logger
   
   
-  def create_models(self) -> Tuple[BaseModelEntity]:
+  def create_models(self) -> BaseModelEntity:
     try:
       model_training = self.model_creator.create_model_training()
-      model_embedding = self.model_creator.create_model_embedding(model_training)
-      return (model_training, model_embedding)
+      return model_training
     except Exception as error:
       error_message = f'ModelCreateUsecase.create_models: {error}'
       self.logger.log_error(error_message, error)
