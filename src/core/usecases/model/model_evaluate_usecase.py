@@ -20,10 +20,11 @@ class ModelEvaluateUsecase:
       self,
       model_training: BaseModelEntity,
       model_embedding: BaseModelEntity,
-      test_data: ProcessedDataEntity) -> Tuple[Dict[str, float]]:
+      test_data: ProcessedDataEntity,
+      similarity_threshold: float = 0.5) -> Tuple[Dict[str, float]]:
     try:
-      metrics_training = self.model_evaluator.evaluate_model_training(model_training, test_data=test_data)
-      metrics_embedding = self.model_evaluator.evaluate_model_embedding(model_embedding, test_data=test_data)
+      metrics_training = self.model_evaluator.evaluate_model_training(model_training, test_data)
+      metrics_embedding = self.model_evaluator.evaluate_model_embedding(model_embedding, test_data, similarity_threshold)
       return (metrics_training, metrics_embedding)
     except Exception as error:
       error_message = f'ModelEvaluateUsecase.evaluate_models: {error}'

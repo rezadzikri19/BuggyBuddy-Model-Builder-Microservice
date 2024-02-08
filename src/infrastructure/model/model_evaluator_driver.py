@@ -40,7 +40,7 @@ class ModelEvaluatorDriver(ModelEvaluatorPort):
   def evaluate_model_embedding(self, model: BaseModelEntity, test_data: ProcessedDataEntity, threshold: float) -> Dict[str, float]:
     df_test_data = base_matrix_to_dataframe(test_data)
     keras_model = base_model_to_keras_model(model)
-        
+
     embd_test_left = keras_model.predict(np.vstack(df_test_data['text_embedded_left']))
     embd_test_right = keras_model.predict(np.vstack(df_test_data['text_embedded_right']))
     similarity_scores = np.array([custom_cosine_similarity(embd_1, embd_2) for embd_1, embd_2 in zip(embd_test_left, embd_test_right)])
