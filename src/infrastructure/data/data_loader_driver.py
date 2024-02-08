@@ -14,7 +14,7 @@ class DataLoaderDriver(DataLoaderPort):
   def dump_embedded_data(self, data: EmbeddedDataEntity) -> None:
     try:
       curr_dir = os.getcwd()
-      data_dir = os.path.join(curr_dir, 'artifacts', 'embedded_data')
+      data_dir = os.path.join(curr_dir, 'artifacts', 'data', 'embedded_data')
       
       if not os.path.exists(data_dir):
         os.makedirs(data_dir)

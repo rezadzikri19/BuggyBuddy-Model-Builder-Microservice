@@ -18,7 +18,7 @@ class DataExtractorDriver(DataExtractorPort):
   def get_data_from_source(self, data: None = None) -> BaseDataMatrixEntity:
     try:
       curr_dir = os.getcwd()
-      data_dir = os.path.join(curr_dir, 'artifacts', 'extracted_data')
+      data_dir = os.path.join(curr_dir, 'artifacts', 'data', 'extracted_data')
       
       if not os.path.exists(data_dir):
           os.makedirs(data_dir)
