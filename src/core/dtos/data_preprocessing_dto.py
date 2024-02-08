@@ -13,6 +13,7 @@ class DropFeatsEntity(BaseDataMatrixEntity):
         'duplicates_to': int
       }
 
+
 class RemoveDuplicatesEntity(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
@@ -24,6 +25,7 @@ class RemoveDuplicatesEntity(BaseDataMatrixEntity):
         'duplicates_to': int
       }
     
+    
 class AggregateTextEntity(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
@@ -32,6 +34,7 @@ class AggregateTextEntity(BaseDataMatrixEntity):
         'text': str,
         'duplicates_to': int
       }
+
 
 class CleanSentEntity(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
@@ -43,6 +46,7 @@ class CleanSentEntity(BaseDataMatrixEntity):
         'duplicates_to': int
       }
 
+
 class RemoveStopsEntity(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
@@ -53,6 +57,7 @@ class RemoveStopsEntity(BaseDataMatrixEntity):
         'duplicates_to': int
       }
 
+
 class SentEmbeddingEntity(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
@@ -62,6 +67,7 @@ class SentEmbeddingEntity(BaseDataMatrixEntity):
         'embedded_text': List[float],
         'duplicates_to': int
       }
+
 
 class SentPairEntity(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:

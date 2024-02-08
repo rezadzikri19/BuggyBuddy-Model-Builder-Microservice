@@ -1,5 +1,8 @@
 import re
 import numpy as np
+import pandas as pd
+
+from typing import Union
 
 import nltk
 from nltk.tokenize import word_tokenize
@@ -36,7 +39,7 @@ def custom_cosine_similarity(text_1: np.ndarray, text_2: np.ndarray):
   return similarity
 
 
-def evaluate_embedding_model(similarity_scores: np.ndarray, labels: np.ndarray, threshold: float):
+def evaluate_embedding_model(similarity_scores: Union[np.ndarray, pd.Series], labels: Union[np.ndarray, pd.Series], threshold: float):
   embd_binary_similarity = (similarity_scores > threshold).astype(int)
 
   precision = precision_score(labels, embd_binary_similarity)

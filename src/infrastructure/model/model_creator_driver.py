@@ -41,7 +41,7 @@ class ModelCreatorDriver(ModelCreatorPort):
     optimizer = keras.optimizers.Adam(learning_rate=0.002)
     loss = keras.losses.BinaryCrossentropy(from_logits=False)
 
-    model_training.compile(loss=loss, optimizer=optimizer, metrics=[keras.metrics.Precision(), keras.metrics.Recall()])
+    model_training.compile(loss=loss, optimizer=optimizer, metrics=[keras.metrics.Precision(), keras.metrics.Recall(), keras.metrics.AUC()])
     return model_training
   
   
