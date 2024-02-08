@@ -59,7 +59,7 @@ class SentEmbeddingEntity(BaseDataMatrixEntity):
 
     self.columns = {
         'text': str,
-        'embedded_text': List[int],
+        'embedded_text': List[float],
         'duplicates_to': int
       }
 
@@ -68,7 +68,7 @@ class SentPairEntity(BaseDataMatrixEntity):
     super().__init__(data=data, index=index)
 
     self.columns = {
-        'embedded_text_left': List[int],
-        'embedded_text_right': List[int],
+        'text_embedded_left': List[float],
+        'text_embedded_right': List[float],
         'label': int
       }

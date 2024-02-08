@@ -14,5 +14,5 @@ class ModelTrainer(ABC):
     pass
   
   @abstractmethod
-  def train_model_embedding(self, model: BaseModelEntity, data: ProcessedDataEntity) -> None:
+  def get_similarity_threshold(self, model: BaseModelEntity, data: ProcessedDataEntity) -> float:
     pass

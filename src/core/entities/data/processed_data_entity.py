@@ -8,7 +8,7 @@ class ProcessedDataEntity(BaseDataMatrixEntity):
     super().__init__(data=data, index=index)
 
     self.columns = {
-        'embedded_text_left': List[int],
-        'embedded_text_right': List[int],
+        'embedded_text_left': List[float],
+        'embedded_text_right': List[float],
         'label': int
       }

@@ -26,7 +26,7 @@ class ModelTrainUsecase:
       train_data, valid_data = self.model_trainer.split_train_test_data(data, test_ratio=0.2)
       
       self.model_trainer.train_model_training(model_training, train_data=train_data, valid_data=valid_data)
-      self.model_trainer.train_model_embedding(model_embedding, data=data)
+      similarity_threshold = self.model_trainer.get_similarity_threshold(model_embedding, data=data)
     except Exception as error:
       error_message = f'ModelTrainUsecase.train_models: {error}'
       self.logger.log_error(error_message, error)
