@@ -1,6 +1,7 @@
 from typing import List, Optional, Any, Dict
 
-class BaseMatrixEntity:
+
+class BaseDataMatrixEntity:
   def __init__(
       self,
       columns: Optional[Dict[str, Any]] = None,
@@ -56,7 +57,7 @@ class BaseMatrixEntity:
 
 
 
-class BaseArrayModel:
+class BaseDataArrayModel:
   def __init__(
       self,
       column: Optional[Dict[str, Any]] = None,

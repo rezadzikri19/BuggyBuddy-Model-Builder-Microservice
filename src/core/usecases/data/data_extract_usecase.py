@@ -1,9 +1,9 @@
-from ...core.ports.data_extractor_port import DataExtractorPort
-from ...core.ports.logger_port import LoggerPort
+from ...ports.data.data_extractor_port import DataExtractorPort
+from ...ports.logger_port import LoggerPort
 
-from ...core.entities.extracted_data_entity import ExtractedDataEntity
+from ...entities.data.extracted_data_entity import ExtractedDataEntity
 
-from ...core.utils.schema_validation_util import io_schema_validation
+from ...utils.schema_validation_util import io_schema_validation
 
 class ExtractDataRawUsecase():
   def __init__(

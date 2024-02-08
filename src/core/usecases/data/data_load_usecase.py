@@ -1,10 +1,10 @@
-from ...core.ports.data_loader_port import DataLoaderPort
-from ...core.ports.logger_port import LoggerPort
+from ...ports.data.data_loader_port import DataLoaderPort
+from ...ports.logger_port import LoggerPort
 
-from ...core.entities.extracted_data_entity import ExtractedDataEntity
-from ..entities.embedded_data_entity import EmbeddedDataEntity
+from ...entities.data.extracted_data_entity import ExtractedDataEntity
+from ...entities.data.embedded_data_entity import EmbeddedDataEntity
 
-from ...core.utils.schema_validation_util import io_schema_validation
+from ...utils.schema_validation_util import io_schema_validation
 
 class LoadDataUsecase():
   def __init__(

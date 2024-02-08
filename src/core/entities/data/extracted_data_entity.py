@@ -1,8 +1,9 @@
 from typing import Any, List, Optional
 
-from ...core.entities.base_entity import BaseMatrixEntity
+from .base_data_entity import BaseDataMatrixEntity
 
-class ExtractedDataEntity(BaseMatrixEntity):
+
+class ExtractedDataEntity(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
     

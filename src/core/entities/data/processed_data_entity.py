@@ -1,9 +1,9 @@
 from typing import List, Optional, Any
 
-from .base_entity import BaseMatrixEntity
+from .base_data_entity import BaseDataMatrixEntity
 
 
-class DropFeatsEntity(BaseMatrixEntity):
+class DropFeatsEntity(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
     
@@ -17,7 +17,7 @@ class DropFeatsEntity(BaseMatrixEntity):
 
 
 
-class RemoveDuplicatesEntity(BaseMatrixEntity):
+class RemoveDuplicatesEntity(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
 
@@ -31,7 +31,7 @@ class RemoveDuplicatesEntity(BaseMatrixEntity):
     
 
 
-class AggregateTextEntity(BaseMatrixEntity):
+class AggregateTextEntity(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
 
@@ -43,20 +43,7 @@ class AggregateTextEntity(BaseMatrixEntity):
 
 
 
-class CleanSentEntity(BaseMatrixEntity):
-  def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
-    super().__init__(data=data, index=index)
-
-    self.columns = {
-        'bug_id': int,
-        'text': str,
-        'text_cleaned': str,
-        'duplicates_to': int
-      }
-
-
-
-class RemoveStopsEntity(BaseMatrixEntity):
+class CleanSentEntity(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
 
@@ -69,7 +56,20 @@ class RemoveStopsEntity(BaseMatrixEntity):
 
 
 
-class SentEmbeddingEntity(BaseMatrixEntity):
+class RemoveStopsEntity(BaseDataMatrixEntity):
+  def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
+    super().__init__(data=data, index=index)
+
+    self.columns = {
+        'bug_id': int,
+        'text': str,
+        'text_cleaned': str,
+        'duplicates_to': int
+      }
+
+
+
+class SentEmbeddingEntity(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
 
@@ -79,10 +79,10 @@ class SentEmbeddingEntity(BaseMatrixEntity):
         'embedded_text': List[int],
         'duplicates_to': int
       }
-    
 
 
-class SentPairEntity(BaseMatrixEntity):
+
+class SentPairEntity(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
 

@@ -1,14 +1,14 @@
-from ...core.entities.base_entity import BaseMatrixEntity
+from ..entities.data.base_data_entity import BaseDataMatrixEntity
 
 
-def validate_data(data: BaseMatrixEntity, schema: BaseMatrixEntity) -> None:
+def validate_data(data: BaseDataMatrixEntity, schema: BaseDataMatrixEntity) -> None:
   if list(data.columns) != schema.columns:
     Exception('DataValidationUsecase.validate_data: invalid data!')
 
 
-def io_schema_validation(schema_input: BaseMatrixEntity = None, schema_output: BaseMatrixEntity = None):
+def io_schema_validation(schema_input: BaseDataMatrixEntity = None, schema_output: BaseDataMatrixEntity = None):
   def decorator(func):
-    def wrapper(self, data: BaseMatrixEntity, *args, **kwargs) -> BaseMatrixEntity:
+    def wrapper(self, data: BaseDataMatrixEntity, *args, **kwargs) -> BaseDataMatrixEntity:
         if data is not None and schema_input is not None:
           validate_data(data, schema_input)
         
