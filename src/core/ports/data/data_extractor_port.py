@@ -9,5 +9,5 @@ class DataExtractorPort(ABC):
     pass
   
   @abstractmethod
-  def format_data(self, data: None = None) -> ExtractedDataEntity:
+  def format_data(self, data: BaseDataMatrixEntity) -> ExtractedDataEntity:
     pass

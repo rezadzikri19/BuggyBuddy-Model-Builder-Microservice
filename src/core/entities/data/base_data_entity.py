@@ -57,7 +57,7 @@ class BaseDataMatrixEntity:
 
 
 
-class BaseDataArrayModel:
+class BaseDataArrayEntity:
   def __init__(
       self,
       column: Optional[Dict[str, Any]] = None,
