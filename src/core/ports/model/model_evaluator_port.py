@@ -4,7 +4,7 @@ from typing import List, Dict
 from ....core.entities.model.base_model_entity import BaseModelEntity
 from ....core.entities.data.processed_data_entity import ProcessedDataEntity
 
-from ....core.dtos.model.model_evaluator_dto import ModelMetricsDTO
+from ...dtos.model.model_evaluate_dto import ModelMetricsDTO
 
 class ModelEvaluatorPort(ABC):
   @abstractmethod
