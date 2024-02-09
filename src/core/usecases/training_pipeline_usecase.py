@@ -7,7 +7,7 @@ from ...core.usecases.data.data_extract_usecase import ExtractDataUsecase
 from ...core.usecases.data.data_preprocess_usecase import PreprocessDataUsecase
 from ...core.usecases.data.data_load_usecase import LoadDataUsecase
 
-from ...core.entities.data.processed_data_entity import ProcessedDataEntity
+from ...core.entities.data.preprocessed_data_entity import PreprocessedDataEntity
 
 class TrainingPipeline:
   def __init__(
@@ -36,7 +36,7 @@ class TrainingPipeline:
     return result
   
   
-  def run_model_pipeline(self, data: ProcessedDataEntity):
+  def run_model_pipeline(self, data: PreprocessedDataEntity):
     model_training = self.model_create_usecase.create_models()
     
     train_ = self.model_train_usecase.train_models(model_training, data)

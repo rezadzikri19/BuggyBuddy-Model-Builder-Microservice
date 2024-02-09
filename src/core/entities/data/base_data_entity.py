@@ -1,6 +1,5 @@
 from typing import List, Optional, Any, Dict
 
-
 class BaseDataMatrixEntity:
   def __init__(
       self,

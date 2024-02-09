@@ -4,8 +4,7 @@ from ...ports.logger_port import LoggerPort
 from ...utils.schema_validation_util import io_data_validation
 
 from ...entities.data.extracted_data_entity import ExtractedDataEntity
-from ...entities.data.processed_data_entity import *
-
+from ...entities.data.preprocessed_data_entity import *
 
 class PreprocessDataUsecase:
   def __init__(
@@ -16,8 +15,8 @@ class PreprocessDataUsecase:
     self.logger = logger
   
   
-  @io_data_validation(schema_input=ExtractedDataEntity(), schema_output=ProcessedDataEntity())
-  def preprocess_data(self, data: ExtractedDataEntity) -> ProcessedDataEntity:
+  @io_data_validation(schema_input=ExtractedDataEntity(), schema_output=PreprocessedDataEntity())
+  def preprocess_data(self, data: ExtractedDataEntity) -> PreprocessedDataEntity:
     try:
       features_to_drop = ['bug_id', 'status', 'priority', 'resolution', 'severity', 'component', 'product', 'report_type']
       

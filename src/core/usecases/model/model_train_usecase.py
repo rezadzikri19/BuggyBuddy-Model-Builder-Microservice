@@ -6,7 +6,7 @@ from ....core.ports.model.model_creator_port import ModelCreatorPort
 from ....core.ports.logger_port import LoggerPort
 
 from ....core.entities.model.base_model_entity import BaseModelEntity
-from ....core.entities.data.processed_data_entity import ProcessedDataEntity
+from ....core.entities.data.preprocessed_data_entity import PreprocessedDataEntity
 
 from ....core.dtos.model.model_train_dto import TrainModelsDTO
 
@@ -26,7 +26,7 @@ class ModelTrainUsecase:
   def train_models(
       self,
       model_training: BaseModelEntity,
-      data: ProcessedDataEntity) -> TrainModelsDTO:
+      data: PreprocessedDataEntity) -> TrainModelsDTO:
     try:
       train_data, valid_data = self.model_trainer.split_train_test_data(data, test_ratio=0.2)
       

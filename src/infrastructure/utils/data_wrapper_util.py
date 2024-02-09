@@ -1,7 +1,6 @@
 import pandas as pd
 from ...core.entities.data.base_data_entity import BaseDataMatrixEntity, BaseDataArrayEntity
 
-
 def base_matrix_to_dataframe(data_matrix: BaseDataMatrixEntity) -> pd.DataFrame:
   return pd.DataFrame(data=data_matrix.data, columns=data_matrix.columns, index=data_matrix.index)
 

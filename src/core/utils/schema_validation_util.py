@@ -1,6 +1,5 @@
 from ..entities.data.base_data_entity import BaseDataMatrixEntity
 
-
 def validate_data(data: BaseDataMatrixEntity, schema: BaseDataMatrixEntity) -> None:
   if list(data.columns) != schema.columns:
     Exception('DataValidationUsecase.validate_data: invalid data!')

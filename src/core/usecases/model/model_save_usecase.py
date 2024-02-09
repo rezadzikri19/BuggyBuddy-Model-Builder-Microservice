@@ -1,5 +1,3 @@
-from typing import Dict, Any
-
 from ....core.ports.model.model_saver_port import ModelSaverPort
 from ....core.ports.logger_port import LoggerPort
 

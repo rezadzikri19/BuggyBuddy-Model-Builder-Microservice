@@ -5,7 +5,6 @@ from ...entities.data.extracted_data_entity import ExtractedDataEntity
 
 from ...utils.schema_validation_util import io_data_validation
 
-
 class ExtractDataUsecase():
   def __init__(
       self,

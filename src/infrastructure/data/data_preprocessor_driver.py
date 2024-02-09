@@ -13,7 +13,6 @@ from ...core.ports.logger_port import LoggerPort
 from ...infrastructure.utils.data_wrapper_util import dataframe_wrapper
 from ...infrastructure.utils.common_util import remove_special_chars, remove_stops
 
-
 class DataPreprocessorDriver(DataPreprocessorPort):
   def __init__(self, logger: LoggerPort) -> None:
     self.logger = logger

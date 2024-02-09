@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 
 from ....core.entities.data.embedded_data_entity import EmbeddedDataEntity
-from ....core.entities.data.processed_data_entity import ProcessedDataEntity
+from ....core.entities.data.preprocessed_data_entity import PreprocessedDataEntity
 
 class DataLoaderPort(ABC):
   @abstractmethod
-  def dump_preprocessed_data(self, data: ProcessedDataEntity) -> None:
+  def dump_preprocessed_data(self, data: PreprocessedDataEntity) -> None:
     pass
   
   @abstractmethod

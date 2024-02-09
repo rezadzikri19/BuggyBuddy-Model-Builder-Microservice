@@ -1,8 +1,8 @@
 from typing import Optional, Tuple
 
-from core.entities.model.base_model_entity import BaseModelEntity
+from ...core.entities.model.base_model_entity import BaseModelEntity
 
-from ...core.entities.data.processed_data_entity import ProcessedDataEntity
+from ...core.entities.data.preprocessed_data_entity import PreprocessedDataEntity
 from ...core.ports.model.model_trainer_port import ModelTrainer
 from ...core.ports.logger_port import LoggerPort
 
@@ -22,7 +22,7 @@ class ModelTrainerDriver(ModelTrainer):
     self.logger = logger
     
   
-  def split_train_test_data(self, data: ProcessedDataEntity, test_ratio: int = 0.2) -> Tuple(ProcessedDataEntity, ProcessedDataEntity):
+  def split_train_test_data(self, data: PreprocessedDataEntity, test_ratio: int = 0.2) -> Tuple(PreprocessedDataEntity, PreprocessedDataEntity):
     df_data = base_matrix_to_dataframe(data)
     
     df_data_train, df_data_test = train_test_split(
@@ -36,7 +36,7 @@ class ModelTrainerDriver(ModelTrainer):
     return (data_train, data_test)
   
   
-  def train_model_training(self, model: BaseModelEntity, train_data: ProcessedDataEntity, valid_data: Optional[ProcessedDataEntity] = None) -> None:
+  def train_model_training(self, model: BaseModelEntity, train_data: PreprocessedDataEntity, valid_data: Optional[PreprocessedDataEntity] = None) -> None:
     df_train_data = base_matrix_to_dataframe(train_data)
     df_valid_data = base_matrix_to_dataframe(valid_data)
     keras_model = base_model_to_keras_model(model)
@@ -58,7 +58,7 @@ class ModelTrainerDriver(ModelTrainer):
       callbacks=[early_stopping],
       verbose=0)
     
-  def get_similarity_threshold(self, model: BaseModelEntity, data: ProcessedDataEntity) -> float:
+  def get_similarity_threshold(self, model: BaseModelEntity, data: PreprocessedDataEntity) -> float:
     df_data = base_matrix_to_dataframe(data)
     keras_model = base_model_to_keras_model(model)
     
