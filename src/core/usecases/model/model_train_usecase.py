@@ -8,7 +8,7 @@ from ....core.ports.logger_port import LoggerPort
 from ....core.entities.model.base_model_entity import BaseModelEntity
 from ....core.entities.data.processed_data_entity import ProcessedDataEntity
 
-from ....core.dtos.model.model_training_dto import TrainModelsDTO
+from ....core.dtos.model.model_train_dto import TrainModelsDTO
 
 class ModelTrainUsecase:
   def __init__(

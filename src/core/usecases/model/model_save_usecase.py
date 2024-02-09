@@ -5,6 +5,7 @@ from ....core.ports.logger_port import LoggerPort
 
 from ....core.entities.model.base_model_entity import BaseModelEntity
 
+from ....core.dtos.model.model_evaluate_dto import ModelMetricsDTO
 
 class ModelSaveUsecase:
   def __init__(
@@ -19,8 +20,8 @@ class ModelSaveUsecase:
       self,
       model_training: BaseModelEntity,
       model_embedding: BaseModelEntity,
-      model_training_metadata: Dict[str, Any],
-      model_embedding_metadata: Dict[str, Any]) -> None:
+      model_training_metadata: ModelMetricsDTO,
+      model_embedding_metadata: ModelMetricsDTO) -> None:
     try:
       self.model_saver.save_model_training(model_training, model_training_metadata)
       self.model_saver.save_model_embedding(model_embedding, model_embedding_metadata)

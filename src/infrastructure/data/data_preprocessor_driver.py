@@ -20,7 +20,7 @@ class DataPreprocessorDriver(DataPreprocessorPort):
   
   
   @dataframe_wrapper
-  def drop_features(self, data: ExtractedDataEntity, features_to_drop: List[str]) -> DropFeatsEntity:
+  def drop_features(self, data: ExtractedDataEntity, features_to_drop: List[str]) -> DropFeatsDTO:
     try:
       data = data.drop(columns=features_to_drop, axis=1)
       return data
@@ -30,7 +30,7 @@ class DataPreprocessorDriver(DataPreprocessorPort):
       
   
   @dataframe_wrapper
-  def remove_duplicates(self, data: DropFeatsEntity, keep: str = 'first') -> RemoveDuplicatesEntity:
+  def remove_duplicates(self, data: DropFeatsDTO, keep: str = 'first') -> RemoveDuplicatesDTO:
     try:
       columns = list(data.columns)
       data = data.loc[data.astype(str).drop_duplicates(subset=columns, keep=keep).index]
@@ -41,7 +41,7 @@ class DataPreprocessorDriver(DataPreprocessorPort):
       
   
   @dataframe_wrapper
-  def aggregate_text_features(self, data: RemoveDuplicatesEntity) -> AggregateTextEntity:
+  def aggregate_text_features(self, data: RemoveDuplicatesDTO) -> AggregateTextDTO:
     try:
       data['text'] = data['platform'] + ' ' + data['summary'] + ' ' + data['description']
       data = data.drop(columns=['platform', 'summary', 'description'], axis=1)
@@ -52,7 +52,7 @@ class DataPreprocessorDriver(DataPreprocessorPort):
       
   
   @dataframe_wrapper
-  def clean_sentences(self, data: AggregateTextEntity) -> CleanSentEntity:
+  def clean_sentences(self, data: AggregateTextDTO) -> CleanSentDTO:
     try:
       data['text_cleaned'] = data['text'].apply(remove_special_chars)
       return data
@@ -62,7 +62,7 @@ class DataPreprocessorDriver(DataPreprocessorPort):
       
   
   @dataframe_wrapper
-  def remove_stopwords(self, data: CleanSentEntity) -> RemoveStopsEntity:
+  def remove_stopwords(self, data: CleanSentDTO) -> RemoveStopsDTO:
     try:
       data['text_cleaned'] = data['text'].apply(remove_stops)
       return data
@@ -72,7 +72,7 @@ class DataPreprocessorDriver(DataPreprocessorPort):
       
   
   @dataframe_wrapper
-  def generate_sent_embeddings(self, data: RemoveStopsEntity) -> SentEmbeddingEntity:
+  def generate_sent_embeddings(self, data: RemoveStopsDTO) -> SentEmbeddingDTO:
     try:
       sent_embd_model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
       data['text_embedded'] = data['text_cleaned'].apply(sent_embd_model.encode).tolist()
@@ -84,7 +84,7 @@ class DataPreprocessorDriver(DataPreprocessorPort):
       
       
   @dataframe_wrapper
-  def generate_sent_pairs(self, data: SentEmbeddingEntity) -> SentPairEntity:
+  def generate_sent_pairs(self, data: SentEmbeddingDTO) -> SentPairDTO:
     try:
       # Create duplicated sentence pairs
       df_duplicates = data[data['duplicates_to'] != -1].copy()      

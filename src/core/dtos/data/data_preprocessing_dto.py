@@ -2,7 +2,7 @@ from typing import List, Optional, Any
 
 from ....core.entities.data.base_data_entity import BaseDataMatrixEntity
 
-class DropFeatsEntity(BaseDataMatrixEntity):
+class DropFeatsDTO(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
     
@@ -14,7 +14,7 @@ class DropFeatsEntity(BaseDataMatrixEntity):
       }
 
 
-class RemoveDuplicatesEntity(BaseDataMatrixEntity):
+class RemoveDuplicatesDTO(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
 
@@ -26,7 +26,7 @@ class RemoveDuplicatesEntity(BaseDataMatrixEntity):
       }
     
     
-class AggregateTextEntity(BaseDataMatrixEntity):
+class AggregateTextDTO(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
 
@@ -36,18 +36,7 @@ class AggregateTextEntity(BaseDataMatrixEntity):
       }
 
 
-class CleanSentEntity(BaseDataMatrixEntity):
-  def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
-    super().__init__(data=data, index=index)
-
-    self.columns = {
-        'text': str,
-        'text_cleaned': str,
-        'duplicates_to': int
-      }
-
-
-class RemoveStopsEntity(BaseDataMatrixEntity):
+class CleanSentDTO(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
 
@@ -58,7 +47,18 @@ class RemoveStopsEntity(BaseDataMatrixEntity):
       }
 
 
-class SentEmbeddingEntity(BaseDataMatrixEntity):
+class RemoveStopsDTO(BaseDataMatrixEntity):
+  def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
+    super().__init__(data=data, index=index)
+
+    self.columns = {
+        'text': str,
+        'text_cleaned': str,
+        'duplicates_to': int
+      }
+
+
+class SentEmbeddingDTO(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
 
@@ -69,7 +69,7 @@ class SentEmbeddingEntity(BaseDataMatrixEntity):
       }
 
 
-class SentPairEntity(BaseDataMatrixEntity):
+class SentPairDTO(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:
     super().__init__(data=data, index=index)
 

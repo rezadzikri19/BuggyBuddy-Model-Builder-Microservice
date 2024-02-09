@@ -3,7 +3,7 @@ from ...ports.logger_port import LoggerPort
 
 from ...entities.data.embedded_data_entity import EmbeddedDataEntity
 
-from ...utils.schema_validation_util import io_schema_validation
+from ...utils.schema_validation_util import io_data_validation
 
 
 class LoadDataUsecase():
@@ -15,7 +15,7 @@ class LoadDataUsecase():
     self.logger = logger
   
   
-  @io_schema_validation(schema_input=EmbeddedDataEntity())
+  @io_data_validation(schema_input=EmbeddedDataEntity())
   def dump_preprocessed_data(self, data: EmbeddedDataEntity):
     try:
       self.data_loader.dump_preprocessed_data(data)
@@ -24,7 +24,7 @@ class LoadDataUsecase():
       self.logger.log_error(error_message, error)
   
   
-  @io_schema_validation(schema_input=EmbeddedDataEntity())
+  @io_data_validation(schema_input=EmbeddedDataEntity())
   def dump_embedded_data(self, data: EmbeddedDataEntity):
     try:
       self.data_loader.dump_embedded_data(data)

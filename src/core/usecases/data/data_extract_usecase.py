@@ -3,7 +3,7 @@ from ...ports.logger_port import LoggerPort
 
 from ...entities.data.extracted_data_entity import ExtractedDataEntity
 
-from ...utils.schema_validation_util import io_schema_validation
+from ...utils.schema_validation_util import io_data_validation
 
 
 class ExtractDataUsecase():
@@ -15,7 +15,7 @@ class ExtractDataUsecase():
     self.logger = logger
   
   
-  @io_schema_validation(schema_output=ExtractedDataEntity())
+  @io_data_validation(schema_output=ExtractedDataEntity())
   def fetch_data(self, data: None = None) -> ExtractedDataEntity:
     try:
       result = self.data_extractor.get_data_from_source(data)

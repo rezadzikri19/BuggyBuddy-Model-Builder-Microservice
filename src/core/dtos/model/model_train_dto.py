@@ -1,6 +1,6 @@
 from typing import TypedDict
 
-from ....core.entities.model.base_model_entity import BaseModelEntity
+from ...entities.model.base_model_entity import BaseModelEntity
 
 
 class TrainModelsDTO(TypedDict):

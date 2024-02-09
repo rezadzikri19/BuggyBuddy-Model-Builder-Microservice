@@ -6,7 +6,7 @@ def validate_data(data: BaseDataMatrixEntity, schema: BaseDataMatrixEntity) -> N
     Exception('DataValidationUsecase.validate_data: invalid data!')
 
 
-def io_schema_validation(schema_input: BaseDataMatrixEntity = None, schema_output: BaseDataMatrixEntity = None):
+def io_data_validation(schema_input: BaseDataMatrixEntity = None, schema_output: BaseDataMatrixEntity = None):
   def decorator(func):
     def wrapper(self, data: BaseDataMatrixEntity, *args, **kwargs) -> BaseDataMatrixEntity:
         if data is not None and schema_input is not None:

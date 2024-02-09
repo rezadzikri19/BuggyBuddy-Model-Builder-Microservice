@@ -6,6 +6,7 @@ from ....core.ports.logger_port import LoggerPort
 from ....core.entities.model.base_model_entity import BaseModelEntity
 from ....core.entities.data.processed_data_entity import ProcessedDataEntity
 
+from ....core.dtos.model.model_evaluate_dto import ModelMetricsDTO
 
 class ModelEvaluateUsecase:
   def __init__(
@@ -21,7 +22,7 @@ class ModelEvaluateUsecase:
       model_training: BaseModelEntity,
       model_embedding: BaseModelEntity,
       test_data: ProcessedDataEntity,
-      similarity_threshold: float = 0.5) -> Tuple[Dict[str, float]]:
+      similarity_threshold: float = 0.5) -> Tuple[ModelMetricsDTO]:
     try:
       metrics_training = self.model_evaluator.evaluate_model_training(model_training, test_data)
       metrics_embedding = self.model_evaluator.evaluate_model_embedding(model_embedding, test_data, similarity_threshold)

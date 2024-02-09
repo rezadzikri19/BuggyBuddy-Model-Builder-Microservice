@@ -1,6 +1,6 @@
 from typing import Dict, List
 
-from core.dtos.model.model_evaluator_dto import ModelMetricsDTO
+from ...core.dtos.model.model_evaluate_dto import ModelMetricsDTO
 
 from ...core.entities.data.processed_data_entity import ProcessedDataEntity
 from ...core.entities.model.base_model_entity import BaseModelEntity
