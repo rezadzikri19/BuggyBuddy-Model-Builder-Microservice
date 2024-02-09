@@ -9,9 +9,9 @@ from ...entities.data.preprocessed_data_entity import *
 class PreprocessDataUsecase:
   def __init__(
       self,
-      data_transformer: DataPreprocessorPort,
+      data_preprocessor: DataPreprocessorPort,
       logger: LoggerPort) -> None:
-    self.data_transformer = data_transformer
+    self.data_preprocessor = data_preprocessor
     self.logger = logger
   
   
@@ -20,13 +20,13 @@ class PreprocessDataUsecase:
     try:
       features_to_drop = ['bug_id', 'status', 'priority', 'resolution', 'severity', 'component', 'product', 'report_type']
       
-      result = self.data_transformer.drop_features(data, features_to_drop=features_to_drop)
-      result = self.data_transformer.remove_duplicates(data, keep='first')
-      result = self.data_transformer.aggregate_text_features(data)
-      result = self.data_transformer.clean_sentences(data)
-      result = self.data_transformer.remove_stopwords(data)
-      result = self.data_transformer.generate_sent_embeddings(data)
-      result = self.data_transformer.generate_sent_pairs(data)
+      result = self.data_preprocessor.drop_features(data, features_to_drop=features_to_drop)
+      result = self.data_preprocessor.remove_duplicates(data, keep='first')
+      result = self.data_preprocessor.aggregate_text_features(data)
+      result = self.data_preprocessor.clean_sentences(data)
+      result = self.data_preprocessor.remove_stopwords(data)
+      result = self.data_preprocessor.generate_sent_embeddings(data)
+      result = self.data_preprocessor.generate_sent_pairs(data)
       return result
     except Exception as error:
       error_message = f'PreprocessDataUsecase.preprocess_data: {error}'

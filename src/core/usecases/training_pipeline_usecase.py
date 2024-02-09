@@ -9,7 +9,7 @@ from ...core.usecases.data.data_load_usecase import LoadDataUsecase
 
 from ...core.entities.data.preprocessed_data_entity import PreprocessedDataEntity
 
-class TrainingPipeline:
+class TrainingPipelineUsecase:
   def __init__(
       self,
       model_create_usecase: ModelCreateUsecase,
@@ -54,3 +54,8 @@ class TrainingPipeline:
       model_embedding=model_embedding,
       model_training_metadata=training_metrics,
       model_embedding_metadata=embedding_metrics)
+    
+  
+  def run_training_pipeline(self):
+    result = self.run_data_pipeline()
+    self.run_model_pipeline(result)
