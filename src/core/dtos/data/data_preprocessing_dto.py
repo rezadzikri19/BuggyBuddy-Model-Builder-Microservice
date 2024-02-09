@@ -1,6 +1,6 @@
 from typing import List, Optional, Any
 
-from ...core.entities.data.base_data_entity import BaseDataMatrixEntity
+from ....core.entities.data.base_data_entity import BaseDataMatrixEntity
 
 class DropFeatsEntity(BaseDataMatrixEntity):
   def __init__(self, data: Optional[List[List[Any]]] = None, index: Optional[List[Any]] = None) -> None:

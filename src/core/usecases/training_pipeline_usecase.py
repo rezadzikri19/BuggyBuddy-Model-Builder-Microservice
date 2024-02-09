@@ -40,9 +40,9 @@ class TrainingPipeline:
     model_training = self.model_create_usecase.create_models()
     
     train_ = self.model_train_usecase.train_models(model_training, data)
-    model_training = train_['model_training']
-    model_embedding = train_['model_embedding']
-    similarity_threshold = train_['similarity_threshold']
+    model_training = train_.model_training
+    model_embedding = train_.model_embedding
+    similarity_threshold = train_.similarity_threshold
     
     training_metrics, embedding_metrics = self.model_evaluate_usecase.evaluate_models(
       model_training=model_training,

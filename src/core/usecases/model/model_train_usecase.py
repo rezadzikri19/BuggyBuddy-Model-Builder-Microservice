@@ -1,19 +1,20 @@
 from typing import Dict, Any
 
 from ....core.ports.model.model_trainer_port import ModelTrainer
-from ....core.ports.model.model_evaluator_port import Model_Evaluator
+from ....core.ports.model.model_evaluator_port import ModelEvaluatorPort
 from ....core.ports.model.model_creator_port import ModelCreatorPort
 from ....core.ports.logger_port import LoggerPort
 
 from ....core.entities.model.base_model_entity import BaseModelEntity
 from ....core.entities.data.processed_data_entity import ProcessedDataEntity
 
+from ....core.dtos.model.model_training_dto import TrainModelsDTO
 
 class ModelTrainUsecase:
   def __init__(
       self,
       model_trainer: ModelTrainer,
-      model_evaluator: Model_Evaluator,
+      model_evaluator: ModelEvaluatorPort,
       model_creator: ModelCreatorPort,
       logger: LoggerPort) -> None:
     self.model_trainer = model_trainer
@@ -25,7 +26,7 @@ class ModelTrainUsecase:
   def train_models(
       self,
       model_training: BaseModelEntity,
-      data: ProcessedDataEntity) -> Dict[str, Any]:
+      data: ProcessedDataEntity) -> TrainModelsDTO:
     try:
       train_data, valid_data = self.model_trainer.split_train_test_data(data, test_ratio=0.2)
       

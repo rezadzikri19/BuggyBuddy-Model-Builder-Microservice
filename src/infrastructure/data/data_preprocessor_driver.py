@@ -4,8 +4,8 @@ from typing import List
 import pandas as pd
 from sentence_transformers import SentenceTransformer
 
-from core.dtos.data_preprocessing_dto import AggregateTextEntity, CleanSentEntity, DropFeatsEntity, RemoveDuplicatesEntity, RemoveStopsEntity, SentEmbeddingEntity, SentPairEntity
-from core.entities.data.extracted_data_entity import ExtractedDataEntity
+from ...core.dtos.data.data_preprocessing_dto import *
+from ...core.entities.data.extracted_data_entity import ExtractedDataEntity
 
 from ...core.ports.data.data_preprocessor_port import DataPreprocessorPort
 from ...core.ports.logger_port import LoggerPort

@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List
 
 from ....core.entities.data.extracted_data_entity import ExtractedDataEntity
-from ....core.dtos.data_preprocessing_dto import *
+from ....core.dtos.data.data_preprocessing_dto import *
 
 class DataPreprocessorPort(ABC):
   @abstractmethod

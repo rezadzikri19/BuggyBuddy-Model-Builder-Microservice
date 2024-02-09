@@ -1,5 +1,7 @@
 from typing import Dict, List
 
+from core.dtos.model.model_evaluator_dto import ModelMetricsDTO
+
 from ...core.entities.data.processed_data_entity import ProcessedDataEntity
 from ...core.entities.model.base_model_entity import BaseModelEntity
 from ...core.ports.model.model_evaluator_port import ModelEvaluatorPort
@@ -17,7 +19,7 @@ class ModelEvaluatorDriver(ModelEvaluatorPort):
     self.logger = logger
   
   
-  def evaluate_model_training(self, model: BaseModelEntity, test_data: ProcessedDataEntity) -> Dict[str, float]:
+  def evaluate_model_training(self, model: BaseModelEntity, test_data: ProcessedDataEntity) -> ModelMetricsDTO:
     df_test_data = base_matrix_to_dataframe(test_data)
     keras_model = base_model_to_keras_model(model)
     
@@ -36,8 +38,8 @@ class ModelEvaluatorDriver(ModelEvaluatorPort):
         'roc_auc': roc_auc      
       }
     
-    
-  def evaluate_model_embedding(self, model: BaseModelEntity, test_data: ProcessedDataEntity, threshold: float) -> Dict[str, float]:
+  
+  def evaluate_model_embedding(self, model: BaseModelEntity, test_data: ProcessedDataEntity, threshold: float) -> ModelMetricsDTO:
     df_test_data = base_matrix_to_dataframe(test_data)
     keras_model = base_model_to_keras_model(model)
 

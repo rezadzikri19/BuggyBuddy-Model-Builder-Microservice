@@ -27,7 +27,7 @@ class BaseDataMatrixEntity:
     
     if not result:
       raise Exception('BaseMatrixEntity._validate_size: incorrect matrix size!')
-    
+
     if self.columns is not None and len(self.data[0]) != len(self.columns):
       raise Exception('BaseMatrixEntity._validate_size: data size does not match with number of columns!')
     

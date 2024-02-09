@@ -28,7 +28,6 @@ class PreprocessDataUsecase:
       result = self.data_transformer.remove_stopwords(data)
       result = self.data_transformer.generate_sent_embeddings(data)
       result = self.data_transformer.generate_sent_pairs(data)
-      
       return result
     except Exception as error:
       error_message = f'PreprocessDataUsecase.preprocess_data: {error}'
