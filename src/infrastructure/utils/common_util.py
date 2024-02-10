@@ -5,10 +5,14 @@ import pandas as pd
 
 from typing import Union
 
+import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
 from sklearn.metrics import precision_score, recall_score, roc_auc_score
+
+nltk.download('stopwords')
+nltk.download('punkt')
 
 def remove_special_chars(text: str):
   text = text.lower()

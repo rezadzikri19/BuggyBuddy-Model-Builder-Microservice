@@ -49,7 +49,9 @@ def main():
     model_evaluate_usecase=model_evaluate_usecase,
     model_save_usecase=model_save_usecase)
   
-  training_pipeline_usecase.run_training_pipeline()
+  result = training_pipeline_usecase.run_data_pipeline()
+  training_pipeline_usecase.run_model_pipeline(result)
+  # training_pipeline_usecase.run_training_pipeline()
 
 if __name__ == "__main__":
   main()

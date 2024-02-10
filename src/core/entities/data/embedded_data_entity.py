@@ -18,5 +18,6 @@ class EmbeddedDataEntity(BaseDataMatrixEntity):
         'resolution': str,
         'severity': str,
         'priority': str,
+        'duplicates_to': int,
         'vector': List[int],
       }

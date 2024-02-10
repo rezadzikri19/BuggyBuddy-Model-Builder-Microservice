@@ -6,7 +6,7 @@ from ....core.entities.model.base_model_entity import BaseModelEntity
 
 class ModelTrainer(ABC):
   @abstractmethod
-  def split_train_test_data(self, data: PreprocessedDataEntity, test_ratio: int = 0.2) -> Tuple(PreprocessedDataEntity, PreprocessedDataEntity):
+  def split_train_test_data(self, data: PreprocessedDataEntity, test_ratio: float = 0.2) -> Tuple(PreprocessedDataEntity, PreprocessedDataEntity):
     pass
   
   @abstractmethod
