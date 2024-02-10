@@ -4,7 +4,7 @@ from ...core.ports.logger_port import LoggerPort
 
 from ...infrastructure.utils.model_wrapper_util import keras_model_wrapper
 
-import tensorflow.keras as keras
+import keras
 from keras.models import Model
 from keras.layers import Dense, Input, Dot
 

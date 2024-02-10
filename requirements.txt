@@ -1,0 +1,9 @@
+nltk
+numpy
+pandas
+pyarrow
+fastparquet
+requests
+sentence-transformers
+keras
+scikit-learn

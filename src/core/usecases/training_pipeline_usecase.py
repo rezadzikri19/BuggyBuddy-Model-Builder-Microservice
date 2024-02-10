@@ -30,13 +30,13 @@ class TrainingPipelineUsecase:
     
   
   def run_data_pipeline(self):
-    result = self.data_extract_usecase.fetch_data()
+    result = self.data_extract_usecase.fetch_data_from_source()
     result = self.data_preprocess_usecase.preprocess_data(result)
     self.data_load_usecase.dump_preprocessed_data(result)
-    return result
   
   
-  def run_model_pipeline(self, data: PreprocessedDataEntity):
+  def run_model_pipeline(self):
+    data = self.data_extract_usecase.fetch_cached_preprocessed_data()
     model_training = self.model_create_usecase.create_models()
     
     train_ = self.model_train_usecase.train_models(model_training, data)
@@ -57,5 +57,5 @@ class TrainingPipelineUsecase:
     
   
   def run_training_pipeline(self):
-    result = self.run_data_pipeline()
-    self.run_model_pipeline(result)
+    self.run_data_pipeline()
+    self.run_model_pipeline()

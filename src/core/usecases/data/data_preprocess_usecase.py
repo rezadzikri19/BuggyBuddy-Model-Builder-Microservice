@@ -18,7 +18,7 @@ class PreprocessDataUsecase:
   @io_data_validation(schema_input=ExtractedDataEntity(), schema_output=PreprocessedDataEntity())
   def preprocess_data(self, data: ExtractedDataEntity) -> PreprocessedDataEntity:
     try:
-      features_to_drop = ['bug_id', 'status', 'priority', 'resolution', 'severity', 'component', 'product', 'report_type']
+      features_to_drop = ['id', 'status', 'priority', 'resolution', 'severity', 'component', 'product', 'type']
       
       result = self.data_preprocessor.drop_features(data, features_to_drop=features_to_drop)
       result = self.data_preprocessor.remove_duplicates(data, keep='first')

@@ -22,7 +22,7 @@ class ModelTrainerDriver(ModelTrainer):
     self.logger = logger
     
   
-  def split_train_test_data(self, data: PreprocessedDataEntity, test_ratio: int = 0.2) -> Tuple(PreprocessedDataEntity, PreprocessedDataEntity):
+  def split_train_test_data(self, data: PreprocessedDataEntity, test_ratio: int = 0.2) -> Tuple[PreprocessedDataEntity]:
     df_data = base_matrix_to_dataframe(data)
     
     df_data_train, df_data_test = train_test_split(
