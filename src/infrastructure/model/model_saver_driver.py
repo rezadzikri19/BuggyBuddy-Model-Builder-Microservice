@@ -24,12 +24,14 @@ class ModelSaverDriver(ModelSaverPort):
     if not os.path.exists(data_dir):
       os.makedirs(data_dir)
         
-    model_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_model_training.bin'
+    # model_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_model_training.bin'
+    model_name = 'model_training.bin'
     model_path = os.path.join(data_dir, model_name)
     keras_model.save(model_path)
     
     if metadata is not None:
-      metadata_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_metadata_training.json'
+      # metadata_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_metadata_training.json'
+      metadata_name = 'metadata_training.json'
       metadata_path = os.path.join(data_dir, metadata_name)
       save_json(metadata, metadata_path)
     
@@ -43,11 +45,13 @@ class ModelSaverDriver(ModelSaverPort):
     if not os.path.exists(data_dir):
       os.makedirs(data_dir)
         
-    model_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_model_embedding.bin'
+    # model_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_model_embedding.bin'
+    model_name = 'model_embedding.bin'
     model_path = os.path.join(data_dir, model_name)
     keras_model.save(model_path)
     
     if metadata is not None:
-      metadata_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_metadata_embedding.json'
+      # metadata_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_metadata_embedding.json'
+      metadata_name = 'metadata_embedding.json'
       metadata_path = os.path.join(data_dir, metadata_name)
       save_json(metadata, metadata_path)
