@@ -11,8 +11,8 @@ from nltk.corpus import stopwords
 
 from sklearn.metrics import precision_score, recall_score, roc_auc_score
 
-nltk.download('stopwords')
-nltk.download('punkt')
+nltk.download('stopwords', quiet=True)
+nltk.download('punkt', quiet=True)
 
 def remove_special_chars(text: str):
   text = text.lower()

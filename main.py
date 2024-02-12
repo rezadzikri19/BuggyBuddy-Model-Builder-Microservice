@@ -47,10 +47,11 @@ def main():
     model_create_usecase=model_create_usecase,
     model_train_usecase=model_train_usecase,
     model_evaluate_usecase=model_evaluate_usecase,
-    model_save_usecase=model_save_usecase)
+    model_save_usecase=model_save_usecase,
+    logger=logger_driver)
   
   result = training_pipeline_usecase.run_data_pipeline()
-  training_pipeline_usecase.run_model_pipeline(result)
+  # training_pipeline_usecase.run_model_pipeline(result)
   # training_pipeline_usecase.run_training_pipeline()
 
 if __name__ == "__main__":

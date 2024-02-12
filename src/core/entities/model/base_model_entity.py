@@ -22,7 +22,7 @@ class BaseModelEntity:
     self.model.fit(X, y)
     
     
-  def evaluate(self, X: BaseDataMatrixEntity, y: BaseDataArrayEntity) -> List(float):
+  def evaluate(self, X: BaseDataMatrixEntity, y: BaseDataArrayEntity) -> List[float]:
     return self.model.evaluate(X, y)
     
     

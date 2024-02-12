@@ -84,20 +84,22 @@ class DataPreprocessorDriver(DataPreprocessorPort):
   @dataframe_wrapper
   def generate_sent_pairs(self, data: SentEmbeddingDTO) -> SentPairDTO:
     try:
+      data = data.reset_index()
+      df_duplicates = data[data['duplicates_to'] != -1].copy()
+      df_uniques = data[data['duplicates_to'] == -1].copy()
+      
       # Create duplicated sentence pairs
-      df_duplicates = data[data['duplicates_to'] != -1].copy()      
       df_duplicates = pd.merge(
         left=df_duplicates,
         right=df_uniques,
         left_on='duplicates_to',
-        right_on='id',
+        right_on='index',
         suffixes=('_left', '_right'))
-      df_duplicates = df_duplicates[['duplicates_to_left', 'duplicates_to_right']]
+      df_duplicates = df_duplicates[['text_embedded_left', 'text_embedded_right']]
       df_duplicates['label'] = 1
       df_duplicates = df_duplicates.reset_index(drop=True)
       
       # Create unique sentence pairs
-      df_uniques = data[data['duplicates_to'] == -1].copy()
       df_uniques = df_uniques.sample(frac=1, replace=False, random_state=42)
       df_uniques_temp = pd.DataFrame()
       df_uniques_temp['text_embedded_left'] = df_uniques['text_embedded']

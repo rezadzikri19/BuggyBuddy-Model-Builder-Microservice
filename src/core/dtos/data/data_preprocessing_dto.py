@@ -64,7 +64,7 @@ class SentEmbeddingDTO(BaseDataMatrixEntity):
 
     self.columns = {
         'text': str,
-        'embedded_text': List[float],
+        'text_embedded': List[float],
         'duplicates_to': int
       }
 

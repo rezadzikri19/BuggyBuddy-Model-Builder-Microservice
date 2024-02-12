@@ -21,7 +21,8 @@ class DataLoaderDriver(DataLoaderPort):
       if not os.path.exists(data_dir):
         os.makedirs(data_dir)
         
-      file_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_embedded_data.parquet'
+      # file_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_embedded_data.parquet'
+      file_name = 'embedded_data.parquet'
       
       data_path = os.path.join(data_dir, file_name)  
       data.to_parquet(data_path)
@@ -39,7 +40,8 @@ class DataLoaderDriver(DataLoaderPort):
       if not os.path.exists(data_dir):
         os.makedirs(data_dir)
         
-      file_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_preprocessed_data.parquet'
+      # file_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_preprocessed_data.parquet'
+      file_name = 'preprocessed_data.parquet'
       
       data_path = os.path.join(data_dir, file_name)  
       data.to_parquet(data_path)
