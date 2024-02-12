@@ -14,7 +14,7 @@ class ModelCreateUsecase:
   
   def create_models(self) -> BaseModelEntity:
     try:
-      model_training = self.model_creator.create_model_training()
+      model_training = self.model_creator.create_model_training(model=None)
       return model_training
     except Exception as error:
       error_message = f'ModelCreateUsecase.create_models: {error}'

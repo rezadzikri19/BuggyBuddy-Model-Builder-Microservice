@@ -24,14 +24,14 @@ class ModelTrainerDriver(ModelTrainer):
   
   def split_train_test_data(self, data: PreprocessedDataEntity, test_ratio: int = 0.2) -> Tuple[PreprocessedDataEntity]:
     df_data = base_matrix_to_dataframe(data)
-    
+        
     df_data_train, df_data_test = train_test_split(
       df_data,
       shuffle=True,
       stratify=df_data['label'],
       test_size=test_ratio,
       random_state=42)
-    
+        
     data_train, data_test = dataframe_to_base_matrix(df_data_train), dataframe_to_base_matrix(df_data_test)
     return (data_train, data_test)
   
@@ -72,5 +72,5 @@ class ModelTrainerDriver(ModelTrainer):
         [[threshold, *evaluate_embedding_model(similarity_scores, df_data['label'], threshold)] for threshold in thresholds],
         columns=['threshold', 'precision', 'recall', 'roc_auc']
       )
-    max_threshold = threshold_eval.loc[threshold_eval['roc_auc'].argmax()]
+    max_threshold = threshold_eval.loc[threshold_eval['roc_auc'].argmax()]['threshold']
     return max_threshold

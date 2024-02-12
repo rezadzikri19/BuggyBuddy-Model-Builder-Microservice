@@ -44,18 +44,20 @@ class TrainingPipelineUsecase:
   
   def run_model_pipeline(self):
     try:
-      data = self.data_extract_usecase.fetch_cached_preprocessed_data()
+      data = self.data_extract_usecase.fetch_cached_preprocessed_data(data=None)
       model_training = self.model_create_usecase.create_models()
       
       train_ = self.model_train_usecase.train_models(model_training, data)
-      model_training = train_.model_training
-      model_embedding = train_.model_embedding
-      similarity_threshold = train_.similarity_threshold
+      model_training = train_['model_training']
+      model_embedding = train_['model_embedding']
+      similarity_threshold = train_['similarity_threshold']
+      test_data = train_['test_data']
       
       training_metrics, embedding_metrics = self.model_evaluate_usecase.evaluate_models(
         model_training=model_training,
         model_embedding=model_embedding,
-        similarity_threshold=similarity_threshold)
+        similarity_threshold=similarity_threshold,
+        test_data=test_data)
       
       self.model_save_usecase.save_models(
         model_training=model_training,

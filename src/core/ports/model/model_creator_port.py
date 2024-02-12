@@ -4,7 +4,7 @@ from ...entities.model.base_model_entity import BaseModelEntity
 
 class ModelCreatorPort(ABC):
   @abstractmethod
-  def create_model_training(self) -> BaseModelEntity:
+  def create_model_training(self, model: None = None) -> BaseModelEntity:
     pass
   
   @abstractmethod

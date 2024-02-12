@@ -5,5 +5,5 @@ pyarrow
 fastparquet
 requests
 sentence-transformers
-tensorflow
+keras
 scikit-learn

@@ -25,6 +25,7 @@ class ModelEvaluatorDriver(ModelEvaluatorPort):
     X_test_inputs = [np.vstack(X_test['text_embedded_left']), np.vstack(X_test['text_embedded_right'])]
     
     y_pred = keras_model.predict(X_test_inputs)
+    y_pred = (y_pred > 0.5).astype(int)
     
     precision = precision_score(y_test, y_pred)
     recall = recall_score(y_test, y_pred)

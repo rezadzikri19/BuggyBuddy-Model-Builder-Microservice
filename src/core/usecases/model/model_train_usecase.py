@@ -28,7 +28,7 @@ class ModelTrainUsecase:
       model_training: BaseModelEntity,
       data: PreprocessedDataEntity) -> TrainModelsDTO:
     try:
-      train_data, valid_data = self.model_trainer.split_train_test_data(data, test_ratio=0.2)
+      train_data, valid_data = self.model_trainer.split_train_test_data(data, test_ratio=0.25)
       
       self.model_trainer.train_model_training(model_training, train_data=train_data, valid_data=valid_data)
       
@@ -38,7 +38,9 @@ class ModelTrainUsecase:
       return {
           'model_training': model_training,
           'model_embedding': model_embedding,
-          'similarity_threshold': similarity_threshold
+          'similarity_threshold': similarity_threshold,
+          'train_data': train_data,
+          'test_data': valid_data
         }
     except Exception as error:
       error_message = f'ModelTrainUsecase.train_models: {error}'

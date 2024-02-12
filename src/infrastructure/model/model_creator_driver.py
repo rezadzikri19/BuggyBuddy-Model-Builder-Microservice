@@ -14,7 +14,7 @@ class ModelCreatorDriver(ModelCreatorPort):
     
   
   @keras_model_wrapper
-  def create_model_training(self) -> BaseModelEntity:
+  def create_model_training(self, model: None = None) -> BaseModelEntity:
     input_1 = Input(shape=(384, ), name='input_1')
     input_2 = Input(shape=(384, ), name='input_2')
 
