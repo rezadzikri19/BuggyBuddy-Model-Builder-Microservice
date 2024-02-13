@@ -9,7 +9,7 @@ from ...core.ports.logger_port import LoggerPort
 
 from ...infrastructure.utils.data_wrapper_util import dataframe_wrapper
 
-class DataExtractorDriver(DataExtractorPort):
+class LocalDataExtractorDriver(DataExtractorPort):
   def __init__(self, logger: LoggerPort) -> None:
     self.logger = logger
   

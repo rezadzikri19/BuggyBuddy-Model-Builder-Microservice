@@ -5,9 +5,9 @@ from ...core.entities.data.embedded_data_entity import EmbeddedDataEntity
 from ...core.ports.data.data_loader_port import DataLoaderPort
 from ...core.ports.logger_port import LoggerPort
 
-from ...infrastructure.utils.data_wrapper_util import dataframe_wrapper
+from ..utils.data_wrapper_util import dataframe_wrapper
 
-class DataLoaderDriver(DataLoaderPort):
+class LocalDataLoaderDriver(DataLoaderPort):
   def __init__(self, logger: LoggerPort) -> None:
     self.logger = logger
     

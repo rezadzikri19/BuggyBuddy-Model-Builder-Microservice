@@ -15,43 +15,51 @@ class ModelCreatorDriver(ModelCreatorPort):
   
   @keras_model_wrapper
   def create_model_training(self, model: None = None) -> BaseModelEntity:
-    input_1 = Input(shape=(384, ), name='input_1')
-    input_2 = Input(shape=(384, ), name='input_2')
+    try:
+      input_1 = Input(shape=(384, ), name='input_1')
+      input_2 = Input(shape=(384, ), name='input_2')
 
-    shared_node_1 = Dense(256, name='shared_node_1')
-    shared_node_2 = Dense(256, name='shared_node_2')
-    shared_node_3 = Dense(128, name='shared_node_3')
-    shared_node_4 = Dense(128, name='shared_node_4')
+      shared_node_1 = Dense(256, name='shared_node_1')
+      shared_node_2 = Dense(256, name='shared_node_2')
+      shared_node_3 = Dense(128, name='shared_node_3')
+      shared_node_4 = Dense(128, name='shared_node_4')
 
-    x1 = shared_node_1(input_1)
-    x1 = shared_node_2(x1)
-    x1 = shared_node_3(x1)
-    x1 = shared_node_4(x1)
+      x1 = shared_node_1(input_1)
+      x1 = shared_node_2(x1)
+      x1 = shared_node_3(x1)
+      x1 = shared_node_4(x1)
 
-    x2 = shared_node_1(input_2)
-    x2 = shared_node_2(x2)
-    x2 = shared_node_3(x2)
-    x2 = shared_node_4(x2)
+      x2 = shared_node_1(input_2)
+      x2 = shared_node_2(x2)
+      x2 = shared_node_3(x2)
+      x2 = shared_node_4(x2)
 
-    cosine_similarity_layer = Dot(axes=-1, normalize=True, name='cosine_similarity')([x1, x2])
-    output_layer = Dense(1, activation='sigmoid', name='output')(cosine_similarity_layer)
+      cosine_similarity_layer = Dot(axes=-1, normalize=True, name='cosine_similarity')([x1, x2])
+      output_layer = Dense(1, activation='sigmoid', name='output')(cosine_similarity_layer)
 
-    model_training = Model(inputs=[input_1, input_2], outputs=output_layer, name='training_model')
+      model_training = Model(inputs=[input_1, input_2], outputs=output_layer, name='training_model')
 
-    optimizer = keras.optimizers.Adam(learning_rate=0.002)
-    loss = keras.losses.BinaryCrossentropy(from_logits=False)
+      optimizer = keras.optimizers.Adam(learning_rate=0.002)
+      loss = keras.losses.BinaryCrossentropy(from_logits=False)
 
-    model_training.compile(loss=loss, optimizer=optimizer, metrics=[keras.metrics.Precision(), keras.metrics.Recall(), keras.metrics.AUC()])
-    return model_training
+      model_training.compile(loss=loss, optimizer=optimizer, metrics=[keras.metrics.Precision(), keras.metrics.Recall(), keras.metrics.AUC()])
+      return model_training
+    except Exception as error:
+      error_message = f'ModelCreatorDriver.create_model_training: {error}'
+      self.logger.log_error(error_message, error)
   
   
   @keras_model_wrapper
   def create_model_embedding(self, model: BaseModelEntity) -> BaseModelEntity:
-    input_ = Input(shape=(384, ), name='input')
-    hidden = model.get_layer('shared_node_1')(input_)
-    hidden = model.get_layer('shared_node_2')(hidden)
-    hidden = model.get_layer('shared_node_3')(hidden)
-    output_ = model.get_layer('shared_node_4')(hidden)
+    try:
+      input_ = Input(shape=(384, ), name='input')
+      hidden = model.get_layer('shared_node_1')(input_)
+      hidden = model.get_layer('shared_node_2')(hidden)
+      hidden = model.get_layer('shared_node_3')(hidden)
+      output_ = model.get_layer('shared_node_4')(hidden)
 
-    embedding_model = Model(inputs=input_, outputs=output_, name='embd_inference_model')
-    return embedding_model
+      embedding_model = Model(inputs=input_, outputs=output_, name='embd_inference_model')
+      return embedding_model
+    except Exception as error:
+      error_message = f'ModelCreatorDriver.create_model_embedding: {error}'
+      self.logger.log_error(error_message, error)
