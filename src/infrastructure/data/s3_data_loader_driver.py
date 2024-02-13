@@ -9,7 +9,7 @@ from ...core.entities.data.embedded_data_entity import EmbeddedDataEntity
 from ...core.ports.data.data_loader_port import DataLoaderPort
 from ...core.ports.logger_port import LoggerPort
 
-from ..utils.data_wrapper_util import dataframe_wrapper
+from ...infrastructure.utils.data_wrapper_util import dataframe_wrapper
 
 class S3DataLoaderDriver(DataLoaderPort):
   def __init__(

@@ -7,17 +7,12 @@ class EmbeddedDataEntity(BaseDataMatrixEntity):
     super().__init__(data=data, index=index)
     
     self.columns = {
-        'bug_id': int,
-        'report_type': str,
-        'status': str,
+        'id': int,
+        'type': str,
         'product': str,
         'component': str,
         'platform': str,
         'summary': str,
         'description': str,
-        'resolution': str,
-        'severity': str,
-        'priority': str,
-        'duplicates_to': int,
         'vector': List[int],
       }
