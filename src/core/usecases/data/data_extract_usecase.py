@@ -1,10 +1,10 @@
-from ...ports.data.data_extractor_port import DataExtractorPort
-from ...ports.logger_port import LoggerPort
+from ....core.ports.data.data_extractor_port import DataExtractorPort
+from ....core.ports.logger_port import LoggerPort
 
-from ...entities.data.extracted_data_entity import ExtractedDataEntity
-from ...entities.data.preprocessed_data_entity import PreprocessedDataEntity
+from ....core.entities.data.extracted_data_entity import ExtractedDataEntity
+from ....core.entities.data.preprocessed_data_entity import PreprocessedDataEntity
 
-from ...utils.schema_validation_util import io_data_validation
+from ....core.utils.schema_validation_util import io_data_validation
 
 class ExtractDataUsecase():
   def __init__(

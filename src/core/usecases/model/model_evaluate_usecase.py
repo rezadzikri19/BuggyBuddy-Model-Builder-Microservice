@@ -4,7 +4,7 @@ from ....core.ports.model.model_evaluator_port import ModelEvaluatorPort
 from ....core.ports.logger_port import LoggerPort
 
 from ....core.entities.model.base_model_entity import BaseModelEntity
-from ...entities.data.preprocessed_data_entity import PreprocessedDataEntity
+from ....core.entities.data.preprocessed_data_entity import PreprocessedDataEntity
 
 from ....core.dtos.model.model_evaluate_dto import ModelMetricsDTO
 

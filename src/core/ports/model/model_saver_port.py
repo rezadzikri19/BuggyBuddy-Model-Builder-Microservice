@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Any, Optional
 
-from ...entities.model.base_model_entity import BaseModelEntity
+from ....core.entities.model.base_model_entity import BaseModelEntity
 
 class ModelSaverPort(ABC):
   @abstractmethod

@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 
 from ....core.entities.model.base_model_entity import BaseModelEntity
-from ...entities.data.preprocessed_data_entity import PreprocessedDataEntity
+from ....core.entities.data.preprocessed_data_entity import PreprocessedDataEntity
 
-from ...dtos.model.model_evaluate_dto import ModelMetricsDTO
+from ....core.dtos.model.model_evaluate_dto import ModelMetricsDTO
 
 class ModelEvaluatorPort(ABC):
   @abstractmethod

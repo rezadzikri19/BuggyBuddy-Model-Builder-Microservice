@@ -1,10 +1,10 @@
-from ...ports.data.data_preprocessor_port import DataPreprocessorPort
-from ...ports.logger_port import LoggerPort
+from ....core.ports.data.data_preprocessor_port import DataPreprocessorPort
+from ....core.ports.logger_port import LoggerPort
 
-from ...utils.schema_validation_util import io_data_validation
+from ....core.utils.schema_validation_util import io_data_validation
 
-from ...entities.data.extracted_data_entity import ExtractedDataEntity
-from ...entities.data.preprocessed_data_entity import *
+from ....core.entities.data.extracted_data_entity import ExtractedDataEntity
+from ....core.entities.data.preprocessed_data_entity import *
 
 class PreprocessDataUsecase:
   def __init__(
