@@ -30,7 +30,7 @@ class TrainingPipelineUsecase:
     self.data_load_usecase = data_load_usecase
     self.logger = logger  
   
-  def run_data_pipeline(self):
+  def run_data_pipeline(self) -> None:
     try:
       result = self.data_extract_usecase.fetch_data_from_source(data=None)
       result = self.data_preprocess_usecase.preprocess_data(result)
@@ -42,7 +42,7 @@ class TrainingPipelineUsecase:
       self.logger.log_error(error_message, error)
   
   
-  def run_model_pipeline(self):
+  def run_model_pipeline(self) -> None:
     try:
       data = self.data_extract_usecase.fetch_cached_preprocessed_data(data=None)
       model_training = self.model_create_usecase.create_models()
@@ -71,7 +71,7 @@ class TrainingPipelineUsecase:
       self.logger.log_error(error_message, error)
     
   
-  def run_training_pipeline(self):
+  def run_training_pipeline(self) -> None:
     try:
       self.run_data_pipeline()
       self.run_model_pipeline()
