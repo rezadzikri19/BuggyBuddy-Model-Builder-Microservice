@@ -44,7 +44,7 @@ class TrainingPipelineUsecase:
   
   def run_model_pipeline(self) -> None:
     try:
-      data = self.data_extract_usecase.fetch_cached_preprocessed_data(data=None)
+      data = self.data_extract_usecase.fetch_preprocessed_data(data=None)
       model_training = self.model_create_usecase.create_models()
       
       train_ = self.model_train_usecase.train_models(model_training, data)

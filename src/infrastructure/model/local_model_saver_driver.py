@@ -24,8 +24,8 @@ class LocalModelSaverDriver(ModelSaverPort):
       if not os.path.exists(data_dir):
         os.makedirs(data_dir)
           
-      # model_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_model_training.bin'
-      model_name = 'model_training.bin'
+      # model_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_model_training.h5'
+      model_name = 'model_training.h5'
       model_path = os.path.join(data_dir, model_name)
       keras_model.save(model_path)
       
@@ -48,8 +48,8 @@ class LocalModelSaverDriver(ModelSaverPort):
       if not os.path.exists(data_dir):
         os.makedirs(data_dir)
           
-      # model_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_model_embedding.bin'
-      model_name = 'model_embedding.bin'
+      # model_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_model_embedding.h5'
+      model_name = 'model_embedding.h5'
       model_path = os.path.join(data_dir, model_name)
       keras_model.save(model_path)
       

@@ -9,7 +9,7 @@ class DataExtractorPort(ABC):
     pass
   
   @abstractmethod
-  def get_cached_preprocessed_data(self, data: None = None) -> BaseDataMatrixEntity:
+  def get_preprocessed_data(self, data: None = None) -> BaseDataMatrixEntity:
     pass
   
   @abstractmethod

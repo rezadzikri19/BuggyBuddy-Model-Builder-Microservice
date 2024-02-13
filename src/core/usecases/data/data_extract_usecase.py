@@ -27,11 +27,11 @@ class ExtractDataUsecase():
 
   
   @io_data_validation(schema_output=PreprocessedDataEntity())
-  def fetch_cached_preprocessed_data(self, data: None = None) -> PreprocessedDataEntity:
+  def fetch_preprocessed_data(self, data: None = None) -> PreprocessedDataEntity:
     try:
-      result = self.data_extractor.get_cached_preprocessed_data(data)
+      result = self.data_extractor.get_preprocessed_data(data)
       return result
     except Exception as error:
-      error_message = f'ExtractDataUsecase.fetch_cached_preprocessed_data: {error}'
+      error_message = f'ExtractDataUsecase.fetch_preprocessed_data: {error}'
       self.logger.log_error(error_message, error)
 

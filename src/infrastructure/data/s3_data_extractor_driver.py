@@ -20,10 +20,10 @@ class S3DataExtractorDriver(DataExtractorPort):
       bucket_name: str,
       logger: LoggerPort) -> None:
     session = boto3.Session(
-      aws_access_key_id=aws_access_key_id,
-      aws_secret_access_key=aws_secret_access_key,
-      region_name=region_name
-    )
+        aws_access_key_id=aws_access_key_id,
+        aws_secret_access_key=aws_secret_access_key,
+        region_name=region_name
+      )
     self.s3_client = session.client('s3')
     self.bucket_name = bucket_name
     self.logger = logger
@@ -32,7 +32,7 @@ class S3DataExtractorDriver(DataExtractorPort):
   @dataframe_wrapper
   def get_data_from_source(self, data: None = None) -> BaseDataMatrixEntity:
     try:       
-      file_name = '/ETL/processed_data/processed_data.parquet'
+      file_name = 'ETL/data/processed/processed_data.parquet'
       
       response = self.s3_client.get_object(Bucket=self.bucket_name, Key=file_name)
       data = response['Body'].read()
@@ -40,14 +40,14 @@ class S3DataExtractorDriver(DataExtractorPort):
       result = pd.read_parquet(BytesIO(data))
       return result
     except Exception as error:
-      error_message = f'DataExtractorDriver.get_data_from_source: {error}'
+      error_message = f'S3DataExtractorDriver.get_data_from_source: {error}'
       self.logger.log_error(error_message, error)
       
   
   @dataframe_wrapper
-  def get_cached_preprocessed_data(self, data: None = None) -> BaseDataMatrixEntity:
+  def get_preprocessed_data(self, data: None = None) -> BaseDataMatrixEntity:
     try:
-      file_name = '/ETL/preprocessed_data/preprocessed_data.parquet'
+      file_name = 'TRAIN/data/preprocessed/preprocessed_data.parquet'
 
       response = self.s3_client.get_object(Bucket=self.bucket_name, Key=file_name)
       data = response['Body'].read()
@@ -55,7 +55,7 @@ class S3DataExtractorDriver(DataExtractorPort):
       result = pd.read_parquet(BytesIO(data))
       return result
     except Exception as error:
-      error_message = f'DataExtractorDriver.get_cached_preprocessed_data: {error}'
+      error_message = f'S3DataExtractorDriver.get_preprocessed_data: {error}'
       self.logger.log_error(error_message, error)
       
 
@@ -64,5 +64,5 @@ class S3DataExtractorDriver(DataExtractorPort):
     try:
       return data
     except Exception as error:
-      error_message = f'DataExtractorDriver.format_data: {error}'
+      error_message = f'S3DataExtractorDriver.format_data: {error}'
       self.logger.log_error(error_message, error)

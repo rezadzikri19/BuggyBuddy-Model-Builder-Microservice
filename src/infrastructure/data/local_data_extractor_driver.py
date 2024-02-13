@@ -36,7 +36,7 @@ class LocalDataExtractorDriver(DataExtractorPort):
       
   
   @dataframe_wrapper
-  def get_cached_preprocessed_data(self, data: None = None) -> BaseDataMatrixEntity:
+  def get_preprocessed_data(self, data: None = None) -> BaseDataMatrixEntity:
     try:
       curr_dir = os.getcwd()
       data_dir = os.path.join(curr_dir, 'artifacts', 'data', 'preprocessed_data')
@@ -52,7 +52,7 @@ class LocalDataExtractorDriver(DataExtractorPort):
       result = pd.read_parquet(data_path)
       return result
     except Exception as error:
-      error_message = f'DataExtractorDriver.get_cached_preprocessed_data: {error}'
+      error_message = f'DataExtractorDriver.get_preprocessed_data: {error}'
       self.logger.log_error(error_message, error)
       
 
