@@ -4,22 +4,26 @@ from dotenv import load_dotenv
 from src.core.usecases.data.data_extract_usecase import ExtractDataUsecase
 from src.core.usecases.data.data_preprocess_usecase import PreprocessDataUsecase
 from src.core.usecases.data.data_load_usecase import LoadDataUsecase
+
 from src.core.usecases.model.model_create_usecase import ModelCreateUsecase
 from src.core.usecases.model.model_train_usecase import ModelTrainUsecase
 from src.core.usecases.model.model_evaluate_usecase import ModelEvaluateUsecase
 from src.core.usecases.model.model_save_usecase import ModelSaveUsecase
+
 from src.core.usecases.training_pipeline_usecase import TrainingPipelineUsecase
 
-from infrastructure.data.local_data_extractor_driver import LocalDataExtractorDriver
-from infrastructure.data.s3_data_extractor_driver import S3DataExtractorDriver
+from src.infrastructure.data.local_data_extractor_driver import LocalDataExtractorDriver
+from src.infrastructure.data.s3_data_extractor_driver import S3DataExtractorDriver
 from src.infrastructure.data.data_preprocessor_driver import DataPreprocessorDriver
-from infrastructure.data.local_data_loader_driver import LocalDataLoaderDriver
-from infrastructure.data.s3_data_loader_driver import S3DataLoaderDriver
+from src.infrastructure.data.local_data_loader_driver import LocalDataLoaderDriver
+from src.infrastructure.data.s3_data_loader_driver import S3DataLoaderDriver
+
 from src.infrastructure.model.model_creator_driver import ModelCreatorDriver
 from src.infrastructure.model.model_trainer_driver import ModelTrainerDriver
 from src.infrastructure.model.model_evaluator_driver import ModelEvaluatorDriver
-from infrastructure.model.local_model_saver_driver import LocalModelSaverDriver
-from infrastructure.model.s3_model_saver_driver import S3ModelSaverDriver
+from src.infrastructure.model.local_model_saver_driver import LocalModelSaverDriver
+from src.infrastructure.model.s3_model_saver_driver import S3ModelSaverDriver
+
 from src.infrastructure.loggers.logger_driver import LoggerDriver
 
 load_dotenv()
@@ -32,7 +36,7 @@ BUCKET_NAME = os.getenv('BUCKET_NAME')
 def main():
   logger_driver = LoggerDriver()
   
-  data_extractor_driver = LocalDataExtractorDriver(
+  data_extractor_driver = S3DataExtractorDriver(
       aws_access_key_id=AWS_ACCESS_KEY_ID,
       aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
       region_name=REGION_NAME,
@@ -40,8 +44,8 @@ def main():
       logger=logger_driver
     )
   data_preprocessor_driver = DataPreprocessorDriver(logger_driver)
-  data_loader_driver = LocalDataLoaderDriver(logger_driver)
-  data_loader_driver = S3DataExtractorDriver(
+  # data_loader_driver = LocalDataLoaderDriver(logger_driver)
+  data_loader_driver = S3DataLoaderDriver(
       aws_access_key_id=AWS_ACCESS_KEY_ID,
       aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
       region_name=REGION_NAME,
@@ -52,7 +56,7 @@ def main():
   model_creator_driver = ModelCreatorDriver(logger_driver)
   model_trainer_driver = ModelTrainerDriver(logger_driver)
   model_evaluator_driver = ModelEvaluatorDriver(logger_driver)
-  model_saver_driver = LocalModelSaverDriver(logger_driver)
+  # model_saver_driver = LocalModelSaverDriver(logger_driver)
   model_saver_driver = S3ModelSaverDriver(
       aws_access_key_id=AWS_ACCESS_KEY_ID,
       aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
