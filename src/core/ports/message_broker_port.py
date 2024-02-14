@@ -1,7 +1,7 @@
 from typing import Callable, Dict, Any
 from abc import ABC, abstractmethod
 
-class NotificationPort(ABC):
+class MessageBrokerPort(ABC):
   @abstractmethod
   def publish_message(self, exchange: str, route: str, data: Dict[str, Any]) -> None:
     pass

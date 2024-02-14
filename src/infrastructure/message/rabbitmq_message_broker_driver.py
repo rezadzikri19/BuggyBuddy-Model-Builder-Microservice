@@ -3,9 +3,9 @@ import json
 
 from typing import Callable, Dict, Any
 
-from ...core.ports.notification_port import NotificationPort
+from ...core.ports.message_broker_port import MessageBrokerPort
 
-class RabbitMQMessageBrokerDriver(NotificationPort):
+class RabbitMQMessageBrokerDriver(MessageBrokerPort):
   _connection = None
 
   def __init__(self, host: str) -> None:

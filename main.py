@@ -38,7 +38,12 @@ RABBITMQ_HOST = os.getenv('RABBITMQ_HOST')
 logger_driver = LoggerDriver()
 message_broker_driver = RabbitMQMessageBrokerDriver(host=RABBITMQ_HOST)
 
-def run_pipeline():
+def callback(data):
+  logger_driver.log_info(f'message_received: status={data['status']}, message={data['message']}')
+  
+  if data['status'] != 'done':
+    return
+    
   data_extractor_driver = S3DataExtractorDriver(
       aws_access_key_id=AWS_ACCESS_KEY_ID,
       aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
@@ -71,7 +76,7 @@ def run_pipeline():
   data_extract_usecase = ExtractDataUsecase(data_extractor_driver, logger_driver)
   data_preprocess_usecase = PreprocessDataUsecase(data_preprocessor_driver, logger_driver)
   data_load_usecase = LoadDataUsecase(data_loader_driver, logger_driver)
-  
+
   model_create_usecase = ModelCreateUsecase(model_creator_driver, logger_driver)
   model_train_usecase = ModelTrainUsecase(model_trainer=model_trainer_driver,
     model_evaluator=model_evaluator_driver,
@@ -92,13 +97,6 @@ def run_pipeline():
     logger=logger_driver)
   
   training_pipeline_usecase.run_training_pipeline()
-
-
-def callback(data):
-  logger_driver.log_info(f'message received: {data['message']}')
-  
-  if data['status'] == 'done':
-    run_pipeline()
 
 
 def main():
