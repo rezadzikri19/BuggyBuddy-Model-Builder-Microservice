@@ -25,17 +25,20 @@ from src.infrastructure.model.local_model_saver_driver import LocalModelSaverDri
 from src.infrastructure.model.s3_model_saver_driver import S3ModelSaverDriver
 
 from src.infrastructure.loggers.logger_driver import LoggerDriver
+from src.infrastructure.message.rabbitmq_message_broker_driver import RabbitMQMessageBrokerDriver
 
 load_dotenv()
-
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 REGION_NAME = os.getenv('REGION_NAME')
 BUCKET_NAME = os.getenv('BUCKET_NAME')
 
-def main():
-  logger_driver = LoggerDriver()
-  
+RABBITMQ_HOST = os.getenv('RABBITMQ_HOST')
+
+logger_driver = LoggerDriver()
+message_broker_driver = RabbitMQMessageBrokerDriver(host=RABBITMQ_HOST)
+
+def run_pipeline():
   data_extractor_driver = S3DataExtractorDriver(
       aws_access_key_id=AWS_ACCESS_KEY_ID,
       aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
@@ -85,9 +88,22 @@ def main():
     model_train_usecase=model_train_usecase,
     model_evaluate_usecase=model_evaluate_usecase,
     model_save_usecase=model_save_usecase,
+    message_broker=message_broker_driver,
     logger=logger_driver)
   
   training_pipeline_usecase.run_training_pipeline()
+
+
+def callback(data):
+  logger_driver.log_info(f'message received: {data['message']}')
+  
+  if data['status'] == 'done':
+    run_pipeline()
+
+
+def main():
+  message_broker_driver.subscribe_topic(exchange='etl_service', route='all_pipeline', callback=callback)
+
 
 if __name__ == "__main__":
   main()

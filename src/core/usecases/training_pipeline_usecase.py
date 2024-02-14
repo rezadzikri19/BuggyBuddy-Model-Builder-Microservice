@@ -8,6 +8,7 @@ from ...core.usecases.data.data_preprocess_usecase import PreprocessDataUsecase
 from ...core.usecases.data.data_load_usecase import LoadDataUsecase
 
 from ...core.ports.logger_port import LoggerPort
+from ...core.ports.notification_port import NotificationPort
 
 class TrainingPipelineUsecase:
   def __init__(
@@ -19,6 +20,7 @@ class TrainingPipelineUsecase:
       data_extract_usecase: ExtractDataUsecase,
       data_preprocess_usecase: PreprocessDataUsecase,
       data_load_usecase: LoadDataUsecase,
+      message_broker: NotificationPort,
       logger: LoggerPort
       ) -> None:
     self.model_create_usecase = model_create_usecase
@@ -28,7 +30,8 @@ class TrainingPipelineUsecase:
     self.data_extract_usecase = data_extract_usecase
     self.data_preprocess_usecase = data_preprocess_usecase
     self.data_load_usecase = data_load_usecase
-    self.logger = logger  
+    self.message_broker = message_broker  
+    self.logger = logger
   
   def run_data_pipeline(self) -> None:
     try:
@@ -36,9 +39,20 @@ class TrainingPipelineUsecase:
       result = self.data_preprocess_usecase.preprocess_data(result)
       self.data_load_usecase.dump_preprocessed_data(result)
       
+      self.message_broker.publish_message(
+          exchange='train_service',
+          route='data_pipeline',
+          data={'status': 'done', 'message': 'PIPELINE [DATA] - DONE'}
+        )
       self.logger.log_info('PIPELINE [DATA] - DONE')
     except Exception as error:
       error_message = f'TrainingPipelineUsecase.run_data_pipeline: {error}'
+      
+      self.message_broker.publish_message(
+          exchange='train_service',
+          route='data_pipeline',
+          data={'status': 'failed', 'message': f'{error_message}'}
+        )
       self.logger.log_error(error_message, error)
   
   
@@ -65,9 +79,20 @@ class TrainingPipelineUsecase:
         model_training_metadata=training_metrics,
         model_embedding_metadata=embedding_metrics)
       
+      self.message_broker.publish_message(
+          exchange='train_service',
+          route='model_pipeline',
+          data={'status': 'done', 'message': 'PIPELINE [MODEL] - DONE'}
+        )
       self.logger.log_info('PIPELINE [MODEL] - DONE')
     except Exception as error:
       error_message = f'TrainingPipelineUsecase.run_model_pipeline: {error}'
+      
+      self.message_broker.publish_message(
+          exchange='train_service',
+          route='model_pipeline',
+          data={'status': 'failed', 'message': f'{error_message}'}
+        )
       self.logger.log_error(error_message, error)
     
   
@@ -76,7 +101,18 @@ class TrainingPipelineUsecase:
       self.run_data_pipeline()
       self.run_model_pipeline()
       
+      self.message_broker.publish_message(
+          exchange='train_service',
+          route='all_pipeline',
+          data={'status': 'done', 'message': 'PIPELINE [ALL] - DONE'}
+        )
       self.logger.log_info('PIPELINE [ALL] - DONE')
     except Exception as error:
       error_message = f'TrainingPipelineUsecase.run_training_pipeline: {error}'
+      
+      self.message_broker.publish_message(
+          exchange='train_service',
+          route='all_pipeline',
+          data={'status': 'failed', 'message': f'{error_message}'}
+        )
       self.logger.log_error(error_message, error)
