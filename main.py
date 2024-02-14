@@ -41,7 +41,7 @@ message_broker_driver = RabbitMQMessageBrokerDriver(host=RABBITMQ_HOST)
 def callback(data):
   logger_driver.log_info(f'message_received: status={data['status']}, message={data['message']}')
   
-  if data['status'] != 'done':
+  if data['status'] != 'SUCCESS':
     return
     
   data_extractor_driver = S3DataExtractorDriver(
