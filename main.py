@@ -46,11 +46,10 @@ message_broker_driver = RabbitMQMessageBrokerDriver(
   password=RABBITMQ_PASSWORD)
 
 def callback(data):
-  logger_driver.log_info(f'message_received: status={data['status']}, message={data['message']}')
-  
   if data['status'] != 'SUCCESS':
     return
     
+  # data_extractor_driver = LocalDataExtractorDriver(logger_driver)
   data_extractor_driver = S3DataExtractorDriver(
       aws_access_key_id=AWS_ACCESS_KEY_ID,
       aws_secret_access_key=AWS_SECRET_ACCESS_KEY,

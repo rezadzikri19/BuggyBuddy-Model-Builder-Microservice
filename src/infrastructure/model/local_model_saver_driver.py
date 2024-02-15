@@ -18,7 +18,7 @@ class LocalModelSaverDriver(ModelSaverPort):
   def save_model_training(self, model: BaseModelEntity, metadata: Optional[Dict[str, Any]] = None) -> None:
     try:
       keras_model = base_model_to_keras_model(model)
-      data_dir = os.path.join(os.getcwd(), 'artifacts', 'models', 'model_training')
+      data_dir = os.path.join(os.getcwd(), 'artifacts', 'models', 'training')
       os.makedirs(data_dir, exist_ok=True)
                   
       # model_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_model_training.h5'
@@ -39,7 +39,7 @@ class LocalModelSaverDriver(ModelSaverPort):
   def save_model_embedding(self, model: BaseModelEntity, metadata: Optional[Dict[str, Any]] = None) -> None:
     try:
       keras_model = base_model_to_keras_model(model)
-      data_dir = os.path.join(os.getcwd(), 'artifacts', 'models', 'model_embedding')
+      data_dir = os.path.join(os.getcwd(), 'artifacts', 'models', 'embedding')
       os.makedirs(data_dir, exist_ok=True)
                   
       # model_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_model_embedding.h5'
