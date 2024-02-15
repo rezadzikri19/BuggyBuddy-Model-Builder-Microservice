@@ -32,10 +32,18 @@ AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 REGION_NAME = os.getenv('REGION_NAME')
 BUCKET_NAME = os.getenv('BUCKET_NAME')
+
 RABBITMQ_HOST = os.getenv('RABBITMQ_HOST')
+RABBITMQ_PORT = os.getenv('RABBITMQ_PORT')
+RABBITMQ_USERNAME = os.getenv('RABBITMQ_USERNAME')
+RABBITMQ_PASSWORD = os.getenv('RABBITMQ_PASSWORD')
 
 logger_driver = LoggerDriver()
-message_broker_driver = RabbitMQMessageBrokerDriver(host=RABBITMQ_HOST)
+message_broker_driver = RabbitMQMessageBrokerDriver(
+  host=RABBITMQ_HOST,
+  port=RABBITMQ_PORT,
+  username=RABBITMQ_USERNAME,
+  password=RABBITMQ_PASSWORD)
 
 def callback(data):
   logger_driver.log_info(f'message_received: status={data['status']}, message={data['message']}')
