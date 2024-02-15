@@ -28,6 +28,8 @@ from src.infrastructure.loggers.logger_driver import LoggerDriver
 from src.infrastructure.message.rabbitmq_message_broker_driver import RabbitMQMessageBrokerDriver
 
 load_dotenv()
+LOCAL_DATA_DIR_PATH = os.getenv('LOCAL_DATA_DIR_PATH')
+
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 REGION_NAME = os.getenv('REGION_NAME')
@@ -49,7 +51,9 @@ def callback(data):
   if data['status'] != 'SUCCESS':
     return
     
-  # data_extractor_driver = LocalDataExtractorDriver(logger_driver)
+  # data_extractor_driver = LocalDataExtractorDriver(
+  #   data_dir_path=LOCAL_DATA_DIR_PATH,
+  #   logger=logger_driver)
   data_extractor_driver = S3DataExtractorDriver(
       aws_access_key_id=AWS_ACCESS_KEY_ID,
       aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
@@ -58,7 +62,9 @@ def callback(data):
       logger=logger_driver
     )
   data_preprocessor_driver = DataPreprocessorDriver(logger_driver)
-  # data_loader_driver = LocalDataLoaderDriver(logger_driver)
+  # data_loader_driver = LocalDataLoaderDriver(
+  #   data_dir_path=LOCAL_DATA_DIR_PATH,
+  #   logger=logger_driver)
   data_loader_driver = S3DataLoaderDriver(
       aws_access_key_id=AWS_ACCESS_KEY_ID,
       aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
@@ -70,7 +76,9 @@ def callback(data):
   model_creator_driver = ModelCreatorDriver(logger_driver)
   model_trainer_driver = ModelTrainerDriver(logger_driver)
   model_evaluator_driver = ModelEvaluatorDriver(logger_driver)
-  # model_saver_driver = LocalModelSaverDriver(logger_driver)
+  # model_saver_driver = LocalModelSaverDriver(
+  #   data_dir_path=LOCAL_DATA_DIR_PATH,
+  #   logger=logger_driver)
   model_saver_driver = S3ModelSaverDriver(
       aws_access_key_id=AWS_ACCESS_KEY_ID,
       aws_secret_access_key=AWS_SECRET_ACCESS_KEY,

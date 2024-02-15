@@ -11,14 +11,18 @@ import os
 from datetime import datetime
 
 class LocalModelSaverDriver(ModelSaverPort):
-  def __init__(self, logger: LoggerPort) -> None:
+  def __init__(
+      self,
+      data_dir_path: str,
+      logger: LoggerPort) -> None:
+    self.data_dir_path = data_dir_path
     self.logger = logger
     
     
   def save_model_training(self, model: BaseModelEntity, metadata: Optional[Dict[str, Any]] = None) -> None:
     try:
       keras_model = base_model_to_keras_model(model)
-      data_dir = os.path.join(os.getcwd(), 'artifacts', 'models', 'training')
+      data_dir = os.path.join(self.data_dir_path, 'models', 'training')
       os.makedirs(data_dir, exist_ok=True)
                   
       # model_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_model_training.h5'
@@ -39,7 +43,7 @@ class LocalModelSaverDriver(ModelSaverPort):
   def save_model_embedding(self, model: BaseModelEntity, metadata: Optional[Dict[str, Any]] = None) -> None:
     try:
       keras_model = base_model_to_keras_model(model)
-      data_dir = os.path.join(os.getcwd(), 'artifacts', 'models', 'embedding')
+      data_dir = os.path.join(self.data_dir_path, 'models', 'embedding')
       os.makedirs(data_dir, exist_ok=True)
                   
       # model_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_model_embedding.h5'

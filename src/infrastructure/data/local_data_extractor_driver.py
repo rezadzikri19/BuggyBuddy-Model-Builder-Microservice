@@ -10,14 +10,18 @@ from ...core.ports.logger_port import LoggerPort
 from ...infrastructure.utils.data_wrapper_util import dataframe_wrapper
 
 class LocalDataExtractorDriver(DataExtractorPort):
-  def __init__(self, logger: LoggerPort) -> None:
+  def __init__(
+      self,
+      data_dir_path: str,
+      logger: LoggerPort) -> None:
+    self.data_dir_path = data_dir_path
     self.logger = logger
   
   
   @dataframe_wrapper
   def get_data_from_source(self, data: None = None) -> BaseDataMatrixEntity:
     try:
-      data_dir = os.path.join(os.getcwd(), 'artifacts', 'data', 'extracted_data')
+      data_dir = os.path.join(self.data_dir_path, 'data', 'extracted_data')
       os.makedirs(data_dir, exist_ok=True)
         
       file_name = 'extracted_data.parquet'
@@ -33,7 +37,7 @@ class LocalDataExtractorDriver(DataExtractorPort):
   @dataframe_wrapper
   def get_preprocessed_data(self, data: None = None) -> BaseDataMatrixEntity:
     try:
-      data_dir = os.path.join(os.getcwd(), 'artifacts', 'data', 'preprocessed_data')
+      data_dir = os.path.join(self.data_dir_path, 'data', 'preprocessed_data')
       os.makedirs(data_dir, exist_ok=True)
               
       file_name = 'preprocessed_data.parquet'
