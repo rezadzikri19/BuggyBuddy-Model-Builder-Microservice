@@ -32,12 +32,9 @@ class S3ModelSaverDriver(ModelSaverPort):
   def save_model_training(self, model: BaseModelEntity, metadata: Optional[Dict[str, Any]] = None) -> None:
     try:
       keras_model = base_model_to_keras_model(model)
-      curr_dir = os.getcwd()
-      data_dir = os.path.join(curr_dir, 'artifacts', 'models', 'training')
-        
-      if not os.path.exists(data_dir):
-        os.makedirs(data_dir)
-          
+      data_dir = os.path.join(os.getcwd(), 'artifacts', 'models', 'training')
+      os.makedirs(data_dir, exist_ok=True)
+                  
       # model_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_model_training.h5'
       model_name = 'model_training.h5'
       model_local_path = os.path.join(data_dir, model_name)
@@ -62,12 +59,9 @@ class S3ModelSaverDriver(ModelSaverPort):
   def save_model_embedding(self, model: BaseModelEntity, metadata: Optional[Dict[str, Any]] = None) -> None:
     try:
       keras_model = base_model_to_keras_model(model)
-      curr_dir = os.getcwd()
-      data_dir = os.path.join(curr_dir, 'artifacts', 'models', 'embedding')
-        
-      if not os.path.exists(data_dir):
-        os.makedirs(data_dir)
-          
+      data_dir = os.path.join(os.getcwd(), 'artifacts', 'models', 'embedding')
+      os.makedirs(data_dir, exist_ok=True)
+                  
       # model_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_model_embedding.h5'
       model_name = 'model_embedding.h5'
       model_local_path = os.path.join(data_dir, model_name)

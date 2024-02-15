@@ -17,13 +17,8 @@ class LocalDataExtractorDriver(DataExtractorPort):
   @dataframe_wrapper
   def get_data_from_source(self, data: None = None) -> BaseDataMatrixEntity:
     try:
-      curr_dir = os.getcwd()
-      data_dir = os.path.join(curr_dir, 'artifacts', 'data', 'extracted_data')
-      
-      if not os.path.exists(data_dir):
-          os.makedirs(data_dir)
-          
-          raise Exception('directory not found!')
+      data_dir = os.path.join(os.getcwd(), 'artifacts', 'data', 'extracted_data')
+      os.makedirs(data_dir, exist_ok=True)
         
       file_name = 'extracted_data.parquet'
       data_path = os.path.join(data_dir, file_name)
@@ -38,14 +33,9 @@ class LocalDataExtractorDriver(DataExtractorPort):
   @dataframe_wrapper
   def get_preprocessed_data(self, data: None = None) -> BaseDataMatrixEntity:
     try:
-      curr_dir = os.getcwd()
-      data_dir = os.path.join(curr_dir, 'artifacts', 'data', 'preprocessed_data')
-      
-      if not os.path.exists(data_dir):
-          os.makedirs(data_dir)
-          
-          raise Exception('directory not found!')
-        
+      data_dir = os.path.join(os.getcwd(), 'artifacts', 'data', 'preprocessed_data')
+      os.makedirs(data_dir, exist_ok=True)
+              
       file_name = 'preprocessed_data.parquet'
       data_path = os.path.join(data_dir, file_name)
       

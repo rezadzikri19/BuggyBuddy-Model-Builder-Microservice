@@ -15,12 +15,9 @@ class LocalDataLoaderDriver(DataLoaderPort):
   @dataframe_wrapper
   def dump_preprocessed_data(self, data: PreprocessedDataEntity) -> None:
     try:
-      curr_dir = os.getcwd()
-      data_dir = os.path.join(curr_dir, 'artifacts', 'data', 'preprocessed_data')
-      
-      if not os.path.exists(data_dir):
-        os.makedirs(data_dir)
-        
+      data_dir = os.path.join(os.getcwd(), 'artifacts', 'data', 'preprocessed_data')
+      os.makedirs(data_dir, exist_ok=True)
+              
       # file_name = f'{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}_preprocessed_data.parquet'
       file_name = 'preprocessed_data.parquet'
       

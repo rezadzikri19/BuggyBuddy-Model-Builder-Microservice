@@ -23,11 +23,8 @@ class LoggerDriver(LoggerPort):
     self.logger = logging.getLogger(__name__)
     self.logger.setLevel(logging.DEBUG)
     
-    curr_dir = os.getcwd()
-    log_dir = os.path.join(curr_dir, 'logs')
-      
-    if not os.path.exists(log_dir):
-      os.makedirs(log_dir)
+    log_dir = os.path.join(os.getcwd(), 'logs')
+    os.makedirs(log_dir, exist_ok=True)
     
     log_file=f'bank_log_{datetime.now().strftime("%Y-%m-%d")}.log'
     
