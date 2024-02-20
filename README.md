@@ -1,13 +1,13 @@
-# **Model Builder Microservice [BuggyBuddy🐞]**
+# **🛠️ BuggyBuddy Model Builder [Microservice]**
 
 ## Overview
 
-This microservice is a component of the [BuggyBuddy](http://example.com) project, serving as a **Model Builder (Create, Train, Evaluate)**. The resulting model is capable of detecting whether two reports are unique or duplicated. The model is trained using sentence pairs with a label of 0 for different reports and 1 for duplicated reports. Overall, the model exhibits satisfactory performance with an average AUC score of 89% (trained using [FIrefox Bug Report Dataset]()).
+BuggyBuddy Model Builder is a component of the [BuggyBuddy]() project, serving as a **Model Builder (Create, Train, Evaluate, Save)**. This Model Builder is designed to automatically train new models when new data is available, ensuring that the model remains relevant.
 
 ## Features
 
 1. **Complete Model Builder Pipeline**:
-   - Create, Train, and Evaluate model.
+   - Create, Train, Evaluate, and Export model.
 2. **Flexible Implementation**:
    - Provides the flexibility to seamlessly switch between different drivers or implementations, ensuring adaptability to changing technology stack requirements.
 3. **Integration with RabbitMQ**:
@@ -15,7 +15,9 @@ This microservice is a component of the [BuggyBuddy](http://example.com) project
 
 ## Pipelines
 
-**1. Data Pipeline:**
+The pipeline begins with the process of extracting data from an AWS S3 Bucket in the pandas.parquet format. The extracted data then enters the preprocessing pipeline, starting from dropping unused features to creating report pairs and labels.
+
+The processed data is then used to train a model, which is evaluated for performance using several metrics (`precision`, `recall`, and `f1`). Models that meet the criteria are stored in an AWS S3 Bucket and can be used by other microservices.
 
 ```mermaid
 flowchart LR;
@@ -33,145 +35,52 @@ flowchart LR;
     • reports pairing & labeling`"]
     style preprocessing text-align:center
 
-    report{{"`**Raw Reports**
-    - status
-    - product
-    - component
-    - description
-    - resolution
-    - severity
-    - etc..*`"}}
-    style report text-align:center
+    model_training["`**Model Training**:
+    • build model
+    • train model`"]
+    style model_training text-align:center
 
-    report_1{{"`**Preprocessed Reports**
-    *- embedded_text_left (384 vectors)
-    - embedded_text_right (384 vectors)
-    - label (0 for unique, 1 for duplicated)*`"}}
-    style report_1 text-align:center
+    model_evaluation["`**Model Evaluation**:
+    • precision score
+    • recall score
+    • f1 score`"]
+    style model_evaluation text-align:center
 
-    fetch_data --> report
-    report --> preprocessing
-    preprocessing --> report_1
+    model_saving["`**Model Saving**:
+    AWS S3 Bucket`"]
+    style model_saving text-align:center
+
+    fetch_data --> preprocessing
+    preprocessing --> model_training
+    model_training --> model_evaluation
+    model_evaluation --> model_saving
 ```
 
-**2. Training Model Pipeline:**
-
-```mermaid
-flowchart LR;
-    report_l{{"`**embedded_text_left**
-    384 vectors`"}}
-    style report_l text-align:center
-
-    report_r{{"`**embedded_text_right**
-    384 vectors`"}}
-    style report_r text-align:center
-
-    input_layer["`**Dense_Layer**
-    128 nodes (linear)
-    ⬤
-    ⬤
-    ⬤
-    .
-    .
-    .
-    ⬤
-    ⬤
-    ⬤`"]
-    style input_layer text-align:center
-
-    similar["`**Normalized_Dot_Layer**
-    cosine_similarity
-    ⬤`"]
-    style similar text-align:center
-
-    output_layer["`**Dense_Layer**
-    1 node (sigmoid)
-    ⬤`"]
-    style output_layer text-align:center
-
-    result{{"`**similarity score**
-    1 - 0`"}}
-    style result text-align:center
-
-    report_l --> input_layer
-    report_r --> input_layer
-
-    input_layer --> similar
-    similar --> output_layer
-    output_layer --> result
-```
-
-**3. Inference/Embedding Model Pipeline:**
-
-```mermaid
-flowchart LR;
-    report_l{{"`**embedded_text_1**
-    384 vectors`"}}
-    style report_l text-align:center
-
-    report_r{{"`**embedded_text_2**
-    384 vectors`"}}
-    style report_r text-align:center
-
-    input_layer["`**Dense_Layer**
-    128 nodes (linear)
-    ⬤
-    ⬤
-    ⬤
-    .
-    .
-    .
-    ⬤
-    ⬤
-    ⬤`"]
-    style input_layer text-align:center
-
-    similar["`**Similarity Score**
-    cosine_similarity`"]
-    style similar text-align:center
-
-    output_layer["`**Threshold**
-    if score > threshold: duplicated
-    else: not duplicated`"]
-    style output_layer text-align:center
-
-    result{{"`**Is Duplicated?**
-    1 | 0`"}}
-    style result text-align:center
-
-    report_l --> input_layer
-    report_r --> input_layer
-
-    input_layer --> similar
-    similar --> output_layer
-    output_layer --> result
-```
+For more detailed information, you can check the [BuggyBuddy Notebook Repository]().
 
 ## Folder Structure
 
 ```
-my_project/
-│
+app/
 ├── src/
-│   └── core/                     <- Core functionality of the microservice.
-│       ├── dtos/                 <- Data Transfer Objects (DTOs) for transferring data between modules (data & model).
-│       ├── entities/             <- Domain entities representing data objects (data & model).
-│       ├── ports/                <- Ports defining contracts for external services/drivers (data & model).
-│       ├── usecases/             <- Use cases implementing business logic and orchestrating interactions (data & model).
-│       └── utils/                <- Utility functions and helpers (data & model).
-│
-└── infrastructure/               <- Infrastructure-related code and implementations that adhere to the port contract.
-    ├── data/                     <- Data extractor, preprocessor, loader drivers
-    ├── model/                    <- Model creator, trainer, evaluator, and saver drivers
-    ├── loggers/                  <- Logging utilities for capturing application logs.
-    ├── message/                  <- Message brokers and communication interfaces (RabbitMQ driver).
+│   └── core/
+│       ├── dtos/                 <- DTOs for transferring data between pipelines/modules.
+│       ├── entities/             <- Domain entities representing data objects.
+│       ├── ports/                <- Ports defining contracts for drivers.
+│       ├── usecases/             <- Use cases implementing business logic.
+│       └── utils/                <- Utility functions and helpers.
+└── infrastructure/
+    ├── data/                     <- Data related drivers (data extractor, preprocessor, loader)
+    ├── model/                    <- Model related drivers (model creator, trainer, evaluator, and saver)
+    ├── loggers/                  <- Logging utilities drivers.
+    ├── message/                  <- Message broker drivers (RabbitMQ).
     └── utils/                    <- Additional utilities and helpers for infrastructure-related tasks.
 ```
 
 ## Tech Stack
 
 - **Programming Language**: Python
-- **ETL Framework**: pandas, numpy, sklearn
+- **ETL Framework**: Pandas, Numpy, ScikitLearn
 - **Data Wharehouse**: AWS S3 Bucket
 - **Messaging**: RabbitMQ
 
@@ -208,8 +117,8 @@ Edit the `.env` file and configure the necessary settings for your environment.
 ./run.sh
 ```
 
-**_Scheduled cron job (default monthly)_**:
-This microservice uses RabbitMQ event publised by the ETL microservice to inform new data is available. Below are *exchange*, *route*, and *data* of the trigger message:
+**_Trigger training pipeline_**:
+This microservice utilizes RabbitMQ events published by the ETL microservice to notify when new data is available, triggering the training pipeline. Below are the *exchange*, *route*, and *data* of the subscribed message:
 
 ```bash
     exchange: 'etl_service',
@@ -224,7 +133,7 @@ This microservice uses RabbitMQ event publised by the ETL microservice to inform
 
 ## Publised Event Messaging
 
-The following types of events/messages are published by the BuggyBuddy ETL Pipeline Microservice:
+The following types of events/messages are published by the BuggyBuddy Model Builder Microservice:
 
 1. **Train_Pipeline_Data**: Published when data pipeline successfully executed (data extraction, preprocessing, and loading/caching). Below are *exchange*, *route*, and *data* of the message:
 
