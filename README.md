@@ -118,7 +118,7 @@ Edit the `.env` file and configure the necessary settings for your environment.
 ```
 
 **_Trigger training pipeline_**:
-This microservice utilizes RabbitMQ events published by the ETL microservice to notify when new data is available, triggering the training pipeline. Below are the *exchange*, *route*, and *data* of the subscribed message:
+This microservice utilizes RabbitMQ events published by the [BuggyBuddy ETL microservice](https://github.com/uknow19/BuggyBuddy-ETL-Microservice) to notify when new data is available, triggering the training pipeline. Below are the *exchange*, *route*, and *data* of the subscribed message:
 
 ```bash
     exchange: 'etl_service',
