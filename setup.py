@@ -11,11 +11,11 @@ def get_requirements(file_path: str) -> List[str]:
   return requirements
 
 setup(
-  name='Trainer Application for Duplicated Bug Report Detection',
+  name='BuggyBuddy Model Builder Microservice',
   version='0.1',
   author='Reza Dzikri',
   author_email='rezadzikri@gmail.com',
-  description='Model trainer application for duplicated bug report detection design with scalable and maintainable clean architecture.',
+  description='Model builder for BuggyBuddy project.',
   packages=find_packages(),
   install_requires=get_requirements('requirements.txt'),
   license='MIT',
