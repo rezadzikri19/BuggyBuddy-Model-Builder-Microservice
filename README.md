@@ -56,7 +56,7 @@ flowchart LR;
     model_evaluation --> model_saving
 ```
 
-For more detailed information, you can check the [BuggyBuddy Notebook Repository]().
+For more detailed information, you can check the [BuggyBuddy Notebook Repository](https://github.com/uknow19/BuggyBuddy-Notebook).
 
 ## Folder Structure
 
