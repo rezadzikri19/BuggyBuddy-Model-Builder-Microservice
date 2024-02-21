@@ -2,7 +2,7 @@
 
 ## Overview
 
-BuggyBuddy Model Builder is a component of the [BuggyBuddy]() project, serving as a **Model Builder (Create, Train, Evaluate, Save)**. This Model Builder is designed to automatically train new models when new data is available, ensuring that the model remains relevant.
+BuggyBuddy Model Builder is a component of the [BuggyBuddy](https://github.com/rezadzikri19/BuggyBuddy) project, serving as a **Model Builder (Create, Train, Evaluate, Save)**. This Model Builder is designed to automatically train new models when new data is available, ensuring that the model remains relevant.
 
 ## Features
 
@@ -56,7 +56,7 @@ flowchart LR;
     model_evaluation --> model_saving
 ```
 
-For more detailed information, you can check the [BuggyBuddy Notebook Repository](https://github.com/uknow19/BuggyBuddy-Notebook).
+For more detailed information, you can check the [BuggyBuddy Notebook Repository](https://github.com/rezadzikri19/BuggyBuddy-Notebook).
 
 ## Folder Structure
 
@@ -118,7 +118,7 @@ Edit the `.env` file and configure the necessary settings for your environment.
 ```
 
 **_Trigger training pipeline_**:
-This microservice utilizes RabbitMQ events published by the [BuggyBuddy ETL microservice](https://github.com/uknow19/BuggyBuddy-ETL-Microservice) to notify when new data is available, triggering the training pipeline. Below are the *exchange*, *route*, and *data* of the subscribed message:
+This microservice utilizes RabbitMQ events published by the [BuggyBuddy ETL microservice](https://github.com/rezadzikri19/BuggyBuddy-ETL-Microservice) to notify when new data is available, triggering the training pipeline. Below are the *exchange*, *route*, and *data* of the subscribed message:
 
 ```bash
     exchange: 'etl_service',
