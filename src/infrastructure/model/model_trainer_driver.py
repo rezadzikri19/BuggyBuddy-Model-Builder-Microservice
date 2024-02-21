@@ -52,7 +52,7 @@ class ModelTrainerDriver(ModelTrainer):
       X_valid_inputs = [np.vstack(X_valid['text_embedded_left']), np.vstack(X_valid['text_embedded_right'])]
           
       early_stopping = EarlyStopping(monitor='loss', patience=5, restore_best_weights=True)
-      epochs, batch_size = 10, 32
+      epochs, batch_size = 30, 64
       
       keras_model.fit(
         X_train_inputs, y_train,
@@ -64,6 +64,7 @@ class ModelTrainerDriver(ModelTrainer):
     except Exception as error:
       error_message = f'ModelTrainerDriver.train_model_training: {error}'
       self.logger.log_error(error_message, error)
+    
     
   def get_similarity_threshold(self, model: BaseModelEntity, data: PreprocessedDataEntity) -> float:
     try:
@@ -78,9 +79,9 @@ class ModelTrainerDriver(ModelTrainer):
       
       threshold_eval = pd.DataFrame(
           [[threshold, *evaluate_embedding_model(similarity_scores, df_data['label'], threshold)] for threshold in thresholds],
-          columns=['threshold', 'precision', 'recall', 'roc_auc']
+          columns=['threshold', 'precision', 'recall', 'f1']
         )
-      max_threshold = threshold_eval.loc[threshold_eval['roc_auc'].argmax()]['threshold']
+      max_threshold = threshold_eval.loc[threshold_eval['f1'].argmax()]['threshold']
       return max_threshold
     except Exception as error:
       error_message = f'ModelTrainerDriver.get_similarity_threshold: {error}'

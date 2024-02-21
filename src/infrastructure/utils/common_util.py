@@ -9,7 +9,7 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
-from sklearn.metrics import precision_score, recall_score, roc_auc_score
+from sklearn.metrics import precision_score, recall_score, f1_score
 
 nltk.download('stopwords', quiet=True)
 nltk.download('punkt', quiet=True)
@@ -45,8 +45,8 @@ def evaluate_embedding_model(similarity_scores: Union[np.ndarray, pd.Series], la
   embd_binary_similarity = (similarity_scores > threshold).astype(int)
   precision = precision_score(labels, embd_binary_similarity)
   recall = recall_score(labels, embd_binary_similarity)
-  auc = roc_auc_score(labels, embd_binary_similarity)
-  return [precision, recall, auc]
+  f1 = f1_score(labels, embd_binary_similarity)
+  return [precision, recall, f1]
 
 
 def save_json(data, path: str):
